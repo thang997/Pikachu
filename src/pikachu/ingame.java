@@ -32,25 +32,27 @@ public class ingame extends javax.swing.JFrame {
         layout.setSize(850,600);
 //      layoutpikachu.setOpaque();
         layoutpikachu.setBackground(null);
-        layoutpikachu.setSize(700,500);
+        layoutpikachu.setSize(700,400);
         setLocationRelativeTo(null);
         play.setEnabled(false);
        
-//        MyGridLayout();
+        MyGridLayout();
         
     }
     public void MyGridLayout(){
-        GridLayout grid = new GridLayout(9,16);
+        GridLayout grid = new GridLayout(9,16,2,2);
+
         layoutpikachu.setLayout(grid);
         String[] buttons =  new String[144];
         for (int i = 0; i < buttons.length; i++) {
                 JButton but = new JButton();
-                but.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/3.png")));
+               
+                but.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/icon8.jpg")));
                 layoutpikachu.add(but); 
                 
         }
         layoutpikachu.setOpaque(false);
-        
+           
     }
 
     /**
