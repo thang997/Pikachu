@@ -98,7 +98,7 @@ public class beforegame extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(40, 20, 300, 180);
 
-        layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/layout.jpg"))); // NOI18N
+        layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/layout.jpg"))); // NOI18N
         getContentPane().add(layout);
         layout.setBounds(0, 0, 430, 300);
 

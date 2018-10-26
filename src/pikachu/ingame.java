@@ -35,19 +35,17 @@ public class ingame extends javax.swing.JFrame {
         layoutpikachu.setSize(700,400);
         setLocationRelativeTo(null);
         play.setEnabled(false);
-       
         MyGridLayout();
         
     }
     public void MyGridLayout(){
         GridLayout grid = new GridLayout(9,16,2,2);
-
         layoutpikachu.setLayout(grid);
         String[] buttons =  new String[144];
         for (int i = 0; i < buttons.length; i++) {
                 JButton but = new JButton();
                
-                but.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/icon8.jpg")));
+                but.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/icon8.jpg")));
                 layoutpikachu.add(but); 
                 
         }
@@ -92,7 +90,7 @@ public class ingame extends javax.swing.JFrame {
         getContentPane().add(layoutpikachu);
         layoutpikachu.setBounds(120, 30, 410, 340);
 
-        newgame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/3.png"))); // NOI18N
+        newgame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/new.png"))); // NOI18N
         newgame.setBorder(null);
         newgame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +111,7 @@ public class ingame extends javax.swing.JFrame {
 
         time.setText("Thời gian");
         getContentPane().add(time);
-        time.setBounds(120, 10, 70, 14);
+        time.setBounds(530, 0, 70, 14);
 
         reset.setText("reset");
         getContentPane().add(reset);
@@ -139,13 +137,13 @@ public class ingame extends javax.swing.JFrame {
 
         diem.setText("Điểm: 0");
         getContentPane().add(diem);
-        diem.setBounds(490, 10, 70, 14);
+        diem.setBounds(160, 10, 70, 14);
 
         hint.setText("hint");
         getContentPane().add(hint);
         hint.setBounds(20, 30, 73, 23);
 
-        layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/Sleep-Pikachu-Pokemon-Wallpaper.png"))); // NOI18N
+        layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/Sleep-Pikachu-Pokemon-Wallpaper.png"))); // NOI18N
         getContentPane().add(layout);
         layout.setBounds(0, 0, 610, 500);
 
