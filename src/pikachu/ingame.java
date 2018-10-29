@@ -9,11 +9,9 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 import java.util.Locale;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 /**
  *
@@ -21,36 +19,42 @@ import javax.swing.JLabel;
  */
 public class ingame extends javax.swing.JFrame {
 
+    int x;
+    int y;
+    JButton[][] btn;
+
     /**
      * Creates new form ingame
      */
     public ingame() {
         initComponents();
-        setSize(850,600);
+        setSize(850, 600);
         setResizable(false);
         setTitle("Pikachu Game");
-        layout.setSize(850,600);
+        layout.setSize(850, 600);
 //      layoutpikachu.setOpaque();
         layoutpikachu.setBackground(null);
-        layoutpikachu.setSize(700,400);
+        layoutpikachu.setSize(700, 400);
         setLocationRelativeTo(null);
         play.setEnabled(false);
+        diem.setLocation(700, 20);
         MyGridLayout();
-        
+
     }
-    public void MyGridLayout(){
-        GridLayout grid = new GridLayout(9,16,2,2);
+
+    public void MyGridLayout() {
+        btn = new JButton[13][20];
+        GridLayout grid = new GridLayout(9, 16, 2, 2);
         layoutpikachu.setLayout(grid);
-        String[] buttons =  new String[144];
-        for (int i = 0; i < buttons.length; i++) {
-                JButton but = new JButton();
-               
-                but.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/icon8.jpg")));
-                layoutpikachu.add(but); 
-                
+        for (int i = 2; i < 11; i++) {
+            for (int j = 2; j < 18; j++) {
+                btn[i][j] = new JButton();
+                 btn[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/imgpikachu/1.jpg")));
+                layoutpikachu.add(btn[i][j]);
+            }
+
         }
         layoutpikachu.setOpaque(false);
-           
     }
 
     /**
@@ -71,6 +75,7 @@ public class ingame extends javax.swing.JFrame {
         play = new javax.swing.JButton();
         diem = new javax.swing.JLabel();
         hint = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
         layout = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,7 +93,7 @@ public class ingame extends javax.swing.JFrame {
         );
 
         getContentPane().add(layoutpikachu);
-        layoutpikachu.setBounds(120, 30, 410, 340);
+        layoutpikachu.setBounds(120, 60, 410, 340);
 
         newgame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/new.png"))); // NOI18N
         newgame.setBorder(null);
@@ -98,50 +103,52 @@ public class ingame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(newgame);
-        newgame.setBounds(10, 130, 80, 35);
+        newgame.setBounds(10, 135, 80, 30);
 
-        pause.setText("Pause");
+        pause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/pause.png"))); // NOI18N
         pause.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pauseActionPerformed(evt);
             }
         });
         getContentPane().add(pause);
-        pause.setBounds(10, 180, 100, 30);
+        pause.setBounds(10, 180, 80, 30);
 
         time.setText("Thời gian");
         getContentPane().add(time);
-        time.setBounds(530, 0, 70, 14);
+        time.setBounds(120, 20, 70, 14);
 
-        reset.setText("reset");
+        reset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/reset.png"))); // NOI18N
         getContentPane().add(reset);
-        reset.setBounds(10, 260, 100, 30);
+        reset.setBounds(10, 260, 80, 30);
 
-        score.setText("score");
+        score.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/score.png"))); // NOI18N
         score.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 scoreActionPerformed(evt);
             }
         });
         getContentPane().add(score);
-        score.setBounds(10, 300, 100, 30);
+        score.setBounds(10, 300, 80, 30);
 
-        play.setText("Play");
+        play.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/resume.png"))); // NOI18N
         play.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playActionPerformed(evt);
             }
         });
         getContentPane().add(play);
-        play.setBounds(10, 220, 100, 30);
+        play.setBounds(10, 220, 80, 30);
 
         diem.setText("Điểm: 0");
         getContentPane().add(diem);
-        diem.setBounds(160, 10, 70, 14);
+        diem.setBounds(540, 20, 70, 14);
 
-        hint.setText("hint");
+        hint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/hint.png"))); // NOI18N
         getContentPane().add(hint);
-        hint.setBounds(20, 30, 73, 23);
+        hint.setBounds(10, 30, 50, 20);
+        getContentPane().add(jProgressBar1);
+        jProgressBar1.setBounds(180, 10, 400, 30);
 
         layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/Sleep-Pikachu-Pokemon-Wallpaper.png"))); // NOI18N
         getContentPane().add(layout);
@@ -154,7 +161,7 @@ public class ingame extends javax.swing.JFrame {
         // TODO add your handling code here:
         scorerank sr = new scorerank();
         sr.setVisible(true);
-        
+
     }//GEN-LAST:event_scoreActionPerformed
 
     private void newgameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newgameActionPerformed
@@ -213,6 +220,7 @@ public class ingame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel diem;
     private javax.swing.JButton hint;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel layout;
     private javax.swing.JPanel layoutpikachu;
     private javax.swing.JButton newgame;

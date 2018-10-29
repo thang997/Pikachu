@@ -20,6 +20,8 @@ public class beforegame extends javax.swing.JFrame {
         setSize(430,330);
         setLocationRelativeTo(null);
         jPanel1.setVisible(false);
+
+  
     }
 
     /**
@@ -44,8 +46,8 @@ public class beforegame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        batdau.setBackground(new java.awt.Color(255, 153, 0));
-        batdau.setText("Bắt Đầu");
+        batdau.setBackground(new java.awt.Color(255, 255, 255));
+        batdau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/start.png"))); // NOI18N
         batdau.setMaximumSize(new java.awt.Dimension(60, 20));
         batdau.setMinimumSize(new java.awt.Dimension(60, 20));
         batdau.setPreferredSize(new java.awt.Dimension(60, 20));
@@ -55,22 +57,22 @@ public class beforegame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(batdau);
-        batdau.setBounds(60, 30, 90, 30);
+        batdau.setBounds(60, 30, 80, 30);
 
         tieptuc.setBackground(new java.awt.Color(255, 153, 0));
-        tieptuc.setText("Tiếp Tục");
+        tieptuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/resume.png"))); // NOI18N
         getContentPane().add(tieptuc);
-        tieptuc.setBounds(60, 70, 90, 30);
+        tieptuc.setBounds(60, 70, 80, 30);
 
         huongdan.setBackground(new java.awt.Color(255, 153, 0));
-        huongdan.setText("Hướng Dẫn");
+        huongdan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/guide.png"))); // NOI18N
         huongdan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 huongdanActionPerformed(evt);
             }
         });
         getContentPane().add(huongdan);
-        huongdan.setBounds(60, 110, 90, 30);
+        huongdan.setBounds(60, 110, 80, 30);
 
         jPanel1.setLayout(null);
 
@@ -81,7 +83,7 @@ public class beforegame extends javax.swing.JFrame {
             }
         });
         jPanel1.add(quaylai);
-        quaylai.setBounds(200, 133, 90, 30);
+        quaylai.setBounds(200, 150, 90, 30);
 
         jLabel1.setText("Hướng Dẫn");
         jPanel1.add(jLabel1);
@@ -93,7 +95,7 @@ public class beforegame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 40, 270, 113);
+        jScrollPane1.setBounds(20, 40, 270, 100);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(40, 20, 300, 180);
