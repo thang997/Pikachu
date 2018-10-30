@@ -6,22 +6,31 @@
 package pikachu;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
+import java.util.Scanner;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 /**
  *
  * @author Thang
  */
-public class ingame extends javax.swing.JFrame {
+public class ingame extends javax.swing.JFrame implements ActionListener {
 
-    int x;
-    int y;
-    JButton[][] btn;
+    private Algorithm algorithm;
+    private JButton[][] btn;
+    private static int total = 144;
+    Point p1 = null;
+    Point p2 = null;
+    private static int r;
+    private static int c;
 
     /**
      * Creates new form ingame
@@ -43,18 +52,68 @@ public class ingame extends javax.swing.JFrame {
     }
 
     public void MyGridLayout() {
+        algorithm = new Algorithm();
         btn = new JButton[13][20];
         GridLayout grid = new GridLayout(9, 16, 2, 2);
         layoutpikachu.setLayout(grid);
         for (int i = 2; i < 11; i++) {
             for (int j = 2; j < 18; j++) {
-                btn[i][j] = new JButton();
-                 btn[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/imgpikachu/1.jpg")));
+                int a = algorithm.level1.getValue(i, j);
+                btn[i][j] = new JButton(i + "," + j);
+                btn[i][j].addActionListener(this);
+                btn[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/imgpikachu/" + a + ".jpg")));
                 layoutpikachu.add(btn[i][j]);
             }
 
         }
         layoutpikachu.setOpaque(false);
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String btnIndex = e.getActionCommand();
+        int indexDot = btnIndex.lastIndexOf(",");
+        int x = Integer.parseInt(btnIndex.substring(0, indexDot));
+        int y = Integer.parseInt(btnIndex.substring(indexDot + 1,
+                btnIndex.length()));
+        if (p1 == null) {
+            p1 = new Point(x, y);
+            btn[p1.x][p1.y].setBorder(new LineBorder(Color.red));
+        } else {
+            p2 = new Point(x, y);
+            if(algorithm.checkTwoPoint(p1, p2)){
+                algorithm.settohide(p1,p2);
+                total-=2;
+                btn[p1.x][p1.y].setVisible(false);
+                btn[p2.x][p2.y].setVisible(false);               
+            }
+            p1=null;
+            p2=null;
+        }
+    }
+
+    private void check2point() {
+
+        for (int row = 2; row < 11; row++) {
+            for (int column = 2; column < 18; column++) {
+
+                btn[row][column].addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+
+                    }
+                });
+            }
+        }
+
+//        if (algorithm.checkTwoPoint(p1, p2)) {           
+//            algorithm.settohide(p1, p2);
+//            btn[p1.x][p1.y].setVisible(false);
+//            btn[p2.x][p2.y].setVisible(false);            
+//            total -= 2;
+//        }
+//        count=0;
     }
 
     /**
@@ -213,6 +272,7 @@ public class ingame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ingame().setVisible(true);
+
             }
         });
     }
@@ -230,4 +290,5 @@ public class ingame extends javax.swing.JFrame {
     private javax.swing.JButton score;
     private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
+
 }
