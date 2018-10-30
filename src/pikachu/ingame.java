@@ -23,7 +23,6 @@ import javax.swing.border.LineBorder;
  * @author Thang
  */
 public class ingame extends javax.swing.JFrame implements ActionListener {
-
     private Algorithm algorithm;
     private JButton[][] btn;
     private static int total = 144;
@@ -92,30 +91,6 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             p2=null;
         }
     }
-
-    private void check2point() {
-
-        for (int row = 2; row < 11; row++) {
-            for (int column = 2; column < 18; column++) {
-
-                btn[row][column].addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-
-                    }
-                });
-            }
-        }
-
-//        if (algorithm.checkTwoPoint(p1, p2)) {           
-//            algorithm.settohide(p1, p2);
-//            btn[p1.x][p1.y].setVisible(false);
-//            btn[p2.x][p2.y].setVisible(false);            
-//            total -= 2;
-//        }
-//        count=0;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
