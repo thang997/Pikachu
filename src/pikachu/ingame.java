@@ -31,7 +31,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     private static int r;
     private static int c;
 
-    /**
+    /*
      * Creates new form ingame
      */
     public ingame() {
@@ -58,7 +58,8 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         for (int i = 2; i < 11; i++) {
             for (int j = 2; j < 18; j++) {
                 int a = algorithm.level1.getValue(i, j);
-                btn[i][j] = new JButton(i + "," + j);
+                btn[i][j] = new JButton();
+                btn[i][j].setActionCommand(i + "," + j);
                 btn[i][j].addActionListener(this);
                 btn[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/imgpikachu/" + a + ".jpg")));
                 layoutpikachu.add(btn[i][j]);
@@ -81,11 +82,15 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             btn[p1.x][p1.y].setBorder(new LineBorder(Color.red));
         } else {
             p2 = new Point(x, y);
-            if(algorithm.checkTwoPoint(p1, p2)){
+            if(algorithm.checkTwoPoint(p1, p2) && !p1.equals(p2)){
                 algorithm.settohide(p1,p2);
                 total-=2;
                 btn[p1.x][p1.y].setVisible(false);
                 btn[p2.x][p2.y].setVisible(false);               
+            }
+            else{
+                btn[p1.x][p1.y].setBorder(null);
+                btn[p2.x][p2.y].setBorder(null);
             }
             p1=null;
             p2=null;
