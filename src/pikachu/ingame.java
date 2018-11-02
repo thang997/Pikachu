@@ -15,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -30,24 +32,58 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     Point p2 = null;
     private static int r;
     private static int c;
+    private boolean blnPause;
+    private float count=100;
+    private Timer t;
 
     /*
      * Creates new form ingame
      */
-    public ingame() {
+     public ingame() {
         initComponents();
         setSize(850, 600);
         setResizable(false);
         setTitle("Pikachu Game");
-        layout.setSize(850, 600);
-//      layoutpikachu.setOpaque();
-        layoutpikachu.setBackground(null);
-        layoutpikachu.setSize(700, 400);
         setLocationRelativeTo(null);
-        play.setEnabled(false);
-        diem.setLocation(700, 20);
         MyGridLayout();
+        BigLayout();
+        SmallLayout();
+        MyButtons();
+        MyLabel();
+        //newgame.setEnabled(false);
+//        reset.setEnabled(false);
+        try {      
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ingame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ingame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ingame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(ingame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
+        
+        t = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!blnPause) {
+                    progesstime.setValue((int) count);
+                    count = (float) (count - 0.2);
+                    progesstime.setStringPainted(true);
+                }
+                if (count == 0) {
+                    JOptionPane.showMessageDialog(null, "Game over");
+                    beforegame bg = new beforegame();
+                    bg.setVisible(true);
+                    setVisible(false);
+                    t.stop();
+                }
+            }
 
+        });
+        t.start();
     }
 
     public void MyGridLayout() {
@@ -96,6 +132,23 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             p2=null;
         }
     }
+    public void BigLayout() {
+        layout.setSize(850, 600);
+    }
+
+    public void SmallLayout() {
+        layoutpikachu.setBackground(null);
+        layoutpikachu.setSize(700, 400);
+    }
+
+    public void MyButtons() {
+        play.setEnabled(false);
+        hint.setSize(50, 50);
+    }
+
+    public void MyLabel() {
+        diem.setLocation(700, 20);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,12 +162,11 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         newgame = new javax.swing.JButton();
         pause = new javax.swing.JButton();
         time = new javax.swing.JLabel();
-        reset = new javax.swing.JButton();
         score = new javax.swing.JButton();
         play = new javax.swing.JButton();
         diem = new javax.swing.JLabel();
         hint = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        progesstime = new javax.swing.JProgressBar();
         layout = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -132,7 +184,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         );
 
         getContentPane().add(layoutpikachu);
-        layoutpikachu.setBounds(120, 60, 410, 340);
+        layoutpikachu.setBounds(130, 80, 410, 340);
 
         newgame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/new.png"))); // NOI18N
         newgame.setBorder(null);
@@ -142,7 +194,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(newgame);
-        newgame.setBounds(10, 135, 80, 30);
+        newgame.setBounds(10, 150, 80, 30);
 
         pause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/pause.png"))); // NOI18N
         pause.addActionListener(new java.awt.event.ActionListener() {
@@ -151,15 +203,11 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(pause);
-        pause.setBounds(10, 180, 80, 30);
+        pause.setBounds(10, 190, 80, 30);
 
         time.setText("Thời gian");
         getContentPane().add(time);
-        time.setBounds(120, 20, 70, 14);
-
-        reset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/reset.png"))); // NOI18N
-        getContentPane().add(reset);
-        reset.setBounds(10, 260, 80, 30);
+        time.setBounds(120, 20, 70, 16);
 
         score.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/score.png"))); // NOI18N
         score.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +216,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(score);
-        score.setBounds(10, 300, 80, 30);
+        score.setBounds(10, 270, 80, 30);
 
         play.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/resume.png"))); // NOI18N
         play.addActionListener(new java.awt.event.ActionListener() {
@@ -177,17 +225,17 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(play);
-        play.setBounds(10, 220, 80, 30);
+        play.setBounds(10, 230, 80, 30);
 
         diem.setText("Điểm: 0");
         getContentPane().add(diem);
-        diem.setBounds(540, 20, 70, 14);
+        diem.setBounds(540, 20, 70, 16);
 
         hint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/hint.png"))); // NOI18N
         getContentPane().add(hint);
         hint.setBounds(10, 30, 50, 20);
-        getContentPane().add(jProgressBar1);
-        jProgressBar1.setBounds(180, 10, 400, 30);
+        getContentPane().add(progesstime);
+        progesstime.setBounds(180, 10, 400, 30);
 
         layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/Sleep-Pikachu-Pokemon-Wallpaper.png"))); // NOI18N
         getContentPane().add(layout);
@@ -205,6 +253,8 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
 
     private void newgameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newgameActionPerformed
         // TODO add your handling code here:
+        count=100;
+        t.start();
     }//GEN-LAST:event_newgameActionPerformed
 
     private void pauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseActionPerformed
@@ -212,6 +262,8 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         layoutpikachu.setVisible(false);
         pause.setEnabled(false);
         play.setEnabled(true);
+        blnPause = !blnPause;
+       
     }//GEN-LAST:event_pauseActionPerformed
 
     private void playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playActionPerformed
@@ -219,54 +271,54 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         layoutpikachu.setVisible(true);
         play.setEnabled(false);
         pause.setEnabled(true);
+        blnPause = !blnPause;
     }//GEN-LAST:event_playActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ingame().setVisible(true);
-
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ingame().setVisible(true);
+//
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel diem;
     private javax.swing.JButton hint;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel layout;
     private javax.swing.JPanel layoutpikachu;
     private javax.swing.JButton newgame;
     private javax.swing.JButton pause;
     private javax.swing.JButton play;
-    private javax.swing.JButton reset;
+    private javax.swing.JProgressBar progesstime;
     private javax.swing.JButton score;
     private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables

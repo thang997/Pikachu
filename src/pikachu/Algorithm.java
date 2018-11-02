@@ -66,9 +66,10 @@ public class Algorithm {
         int min = Math.min(y1, y2);
         int max = Math.max(y1, y2);
         // run column
-        if (max - min == 1 && level1.getValue(x, max) != 0) {
+        if (max - min == 1 && level1.getValue(x,min)!=0 && level1.getValue(x,max)!=0) {
             return false;
         }
+       
         for (int y = min + 1; y < max; y++) {
             if (level1.getValue(x, y) != 0) { // if see barrier then die
                 return false;
@@ -84,9 +85,10 @@ public class Algorithm {
     private boolean checkLineY(int x1, int x2, int y) {
         int min = Math.min(x1, x2);
         int max = Math.max(x1, x2);
-        if (max - min == 1 && level1.getValue(max, y) != 0) {
+        if (max - min == 1 && level1.getValue(min, y) != 0 && level1.getValue(max, y)!=0) {
             return false;
         }
+       
         for (int x = min + 1; x < max; x++) {
             if (level1.getValue(x, y) != 0) {
                 return false;
@@ -134,7 +136,7 @@ public class Algorithm {
     private boolean checkNextLineX(Point p1, Point p2) {
         if (p1.x < p2.x) {
             if (p1.y < p2.y) {
-                if (checkLineX(p1.x, p1.y, p1.y+1) == true || checkLineX(p1.x + 1, p1.y-1, p2.y) == true) {
+                if (checkLineX(p1.x, p1.y, p2.y+1) == true || checkLineX(p1.x + 1, p1.y-1, p2.y) == true) {
                     return true;
                 } else {
                     return false;
