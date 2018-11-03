@@ -22,6 +22,10 @@ public class Level {
     public int getValue(int x, int y) {
         return Board[x][y];
     }
+    
+    public void setValuewhenChange(int x, int y, int value) {
+       Board[x][y] = value;     
+    }
 
     public void setValue(Point p1, Point p2) {
        Board[p1.x][p1.y]=0;
