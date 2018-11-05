@@ -138,7 +138,6 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                 total -= 2;
                 StaticFinalvariable.TotalPoint += 10;
                 diem.setText("Score: " + StaticFinalvariable.TotalPoint);
-
                 if (StaticFinalvariable.Level == 1) {
                     btn[p1.x][p1.y].setVisible(false);
                     btn[p2.x][p2.y].setVisible(false);
