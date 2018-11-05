@@ -189,10 +189,9 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             StaticFinalvariable.TotalPoint += (count * 5);
             diem.setText("Score: " + StaticFinalvariable.TotalPoint);
             StaticFinalvariable.Level++;
-            level.setText("Level:" + StaticFinalvariable.Level);
-            layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/" + StaticFinalvariable.Level + ".jpg")));
             if (StaticFinalvariable.Level <= 3) {
-
+                level.setText("Level:" + StaticFinalvariable.Level);
+                layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/" + StaticFinalvariable.Level + ".jpg")));
                 total = 144;
                 count = 100;
                 progesstime.setValue((int) count);
@@ -236,7 +235,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                         }
                     }
                 }
-                if(click==JOptionPane.NO_OPTION){
+                if (click == JOptionPane.NO_OPTION) {
                     System.exit(0);
                 }
             }

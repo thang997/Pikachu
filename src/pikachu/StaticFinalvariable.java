@@ -12,5 +12,5 @@ package pikachu;
 public class StaticFinalvariable {
     public static int TotalPoint=0;
     public static int hintNumber = 3;
-    public static int Level = 1; 
+    public static int Level = 3; 
 }
