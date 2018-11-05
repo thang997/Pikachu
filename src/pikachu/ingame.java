@@ -38,6 +38,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     private boolean blnPause;
     private float count = 100;
     private Timer t;
+    private GridLayout grid;
 
     /*
      * Creates new form ingame
@@ -71,7 +72,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!blnPause) {
-                    count = (float) (count - 10);
+                    count = (float) (count - 0.2);
                     progesstime.setValue((int) count);
                     progesstime.setStringPainted(true);
                 }
@@ -82,20 +83,21 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                         progesstime.setValue((int) count);
                         t.start();
                     }
-                    if(click==JOptionPane.NO_OPTION){
+                    if (click == JOptionPane.NO_OPTION) {
                         System.exit(0);
                     }
                 }
             }
-
         });
         t.start();
     }
 
     public void MyGridLayout() {
+        layoutpikachu.removeAll();
         algorithm = new Algorithm();
+        Change();
         btn = new JButton[13][20];
-        GridLayout grid = new GridLayout(9, 16, 2, 2);
+        grid = new GridLayout(9, 16, 2, 2);
         layoutpikachu.setLayout(grid);
         for (int i = 2; i < 11; i++) {
             for (int j = 2; j < 18; j++) {
@@ -105,7 +107,6 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                 btn[i][j].addActionListener(this);
                 btn[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/imgpikachu/" + a + ".jpg")));
                 layoutpikachu.add(btn[i][j]);
-                Change();
             }
         }
         layoutpikachu.setOpaque(false);
@@ -124,16 +125,52 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         } else {
             p2 = new Point(x, y);
             if (algorithm.checkTwoPoint(p1, p2) && !p1.equals(p2)) {
+                btn[p2.x][p2.y].setBorder(new LineBorder(Color.red));
                 algorithm.settohide(p1, p2);
                 total -= 2;
-                btn[p1.x][p1.y].setVisible(false);
-                btn[p2.x][p2.y].setVisible(false);
                 StaticFinalvariable.TotalPoint += 10;
                 diem.setText("Điểm: " + StaticFinalvariable.TotalPoint);
-            } else {
-                btn[p1.x][p1.y].setBorder(null);
-                btn[p2.x][p2.y].setBorder(null);
+                
+                if (StaticFinalvariable.Level == 1) {
+                    btn[p1.x][p1.y].setVisible(false);
+                    btn[p2.x][p2.y].setVisible(false);
+                }
+
+                if (StaticFinalvariable.Level == 2) {
+                    algorithm.level1.settinglevel2();
+                    for (int i = 2; i < 11; i++) {
+                        for (int j = 2; j < 18; j++) {
+                            int a = algorithm.level1.getValue(i, j);
+                            if (a == 0) {
+                                btn[i][j].setVisible(false);
+                            } else {
+                                btn[i][j].setActionCommand(i + "," + j);                              
+                                btn[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/imgpikachu/" + a + ".jpg")));
+
+                            }
+                        }
+                    }
+                }
+
+                if (StaticFinalvariable.Level == 3) {
+                    algorithm.level1.settinglevel3();
+                    for (int i = 2; i < 11; i++) {
+                        for (int j = 2; j < 18; j++) {
+                            int a = algorithm.level1.getValue(i, j);
+                            if (a == 0) {
+                                btn[i][j].setVisible(false);
+                            } else {
+                                btn[i][j].setActionCommand(i + "," + j);                               
+                                btn[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/imgpikachu/" + a + ".jpg")));
+
+                            }
+                        }
+                    }
+                }
+
             }
+            btn[p1.x][p1.y].setBorder(null);
+            btn[p2.x][p2.y].setBorder(null);
             p1 = null;
             p2 = null;
         }
@@ -141,30 +178,32 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             Change();
         }
         if (total == 0) {
-            System.out.println("You are Victory");
             StaticFinalvariable.TotalPoint += (count * 5);
-        }
-    }
-
-    private boolean checkToChange() {
-        for (int i = 2; i < 11; i++) {
-            for (int j = 2; j < 18; j++) {
-                if (algorithm.level1.getValue(i, j) != 0) {
-                    for (int a = 2; a < 11; a++) {
-                        for (int b = 2; b < 18; b++) {
-                            if ((i != a || j != b) && algorithm.checkTwoPoint(new Point(i, j), new Point(a, b))) {
-                                return true;
-                            }
-                        }
+            diem.setText("Điểm: " + StaticFinalvariable.TotalPoint);
+            StaticFinalvariable.Level++;
+            if (StaticFinalvariable.Level <= 3) {
+                total = 144;
+                count = 100;
+                progesstime.setValue((int) count);
+                t.start();
+                algorithm = new Algorithm();
+                Change();
+                for (int i = 2; i < 11; i++) {
+                    for (int j = 2; j < 18; j++) {
+                        btn[i][j].setVisible(true);
+                        int a = algorithm.level1.getValue(i, j);
+                        btn[i][j].setActionCommand(i + "," + j);
+                        btn[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/imgpikachu/" + a + ".jpg")));
                     }
                 }
+            } else {
+                System.out.println("You are Victory");
             }
         }
-        return false;
     }
 
     private void Change() {
-        if (!checkToChange()) {
+        if (!algorithm.checkToChange()) {
             ArrayList<Point> listPoint = new ArrayList<>();
             ArrayList<Integer> listValue = new ArrayList<>();
             for (int i = 2; i < 11; i++) {
@@ -179,8 +218,10 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             Random random = new Random();
             do {
                 int number = random.nextInt(countNumber);
-                algorithm.level1.setValuewhenChange(listPoint.get(countNumber).x,
-                        listPoint.get(countNumber).y, listValue.get(number));
+                algorithm.level1.setValuewhenChange(listPoint.get(countNumber-1).x,
+                        listPoint.get(countNumber-1).y, listValue.get(number));
+                listPoint.remove(countNumber-1);
+                listValue.remove(number);
                 countNumber--;
             } while (countNumber > 0);
             for (int i = 2; i < 11; i++) {
@@ -312,11 +353,26 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
 
     private void newgameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newgameActionPerformed
         // TODO add your handling code here:
+
         int click = JOptionPane.showConfirmDialog(null, "Do you wanna play a new game", "Question", JOptionPane.YES_NO_OPTION);
         if (click == JOptionPane.YES_OPTION) {
+            StaticFinalvariable.Level = 1;
+            StaticFinalvariable.hintNumber = 3;
+            StaticFinalvariable.TotalPoint = 0;
+            diem.setText("Điểm: " + StaticFinalvariable.TotalPoint);
             count = 100;
             progesstime.setValue((int) count);
             t.start();
+            algorithm = new Algorithm();
+            Change();
+            for (int i = 2; i < 11; i++) {
+                for (int j = 2; j < 18; j++) {
+                    btn[i][j].setVisible(true);
+                    int a = algorithm.level1.getValue(i, j);
+                    btn[i][j].setActionCommand(i + "," + j);
+                    btn[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/imgpikachu/" + a + ".jpg")));
+                }
+            }
         }
     }//GEN-LAST:event_newgameActionPerformed
 
@@ -335,32 +391,38 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
 
     private void hintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hintActionPerformed
         // TODO add your handling code here:
-        int hint = 0;
-        for (int i = 2; i < 11; i++) {
-            for (int j = 2; j < 18; j++) {
-                if (algorithm.level1.getValue(i, j) != 0) {
-                    for (int a = 2; a < 11; a++) {
-                        for (int b = 2; b < 18; b++) {
-                            if ((i != a || j != b) && algorithm.checkTwoPoint(new Point(i, j), new Point(a, b))) {
-                                System.out.println("(" + i + "," + j + ")," + "(" + a + "," + b + ")");
-                                hint++;
+        if (StaticFinalvariable.hintNumber > 0) {
+            StaticFinalvariable.hintNumber--;
+            int hint = 0;
+            for (int i = 2; i < 11; i++) {
+                for (int j = 2; j < 18; j++) {
+                    if (algorithm.level1.getValue(i, j) != 0) {
+                        for (int a = 2; a < 11; a++) {
+                            for (int b = 2; b < 18; b++) {
+                                if ((i != a || j != b) && algorithm.checkTwoPoint(new Point(i, j), new Point(a, b))) {
+                                    System.out.println("(" + i + "," + j + ")," + "(" + a + "," + b + ")");
+                                    hint++;
+                                    break;
+                                }
+                            }
+                            if (hint != 0) {
                                 break;
                             }
                         }
-                        if (hint != 0) {
-                            break;
-                        }
+                    }
+                    if (hint != 0) {
+                        break;
                     }
                 }
                 if (hint != 0) {
                     break;
                 }
             }
-            if (hint != 0) {
-                break;
-            }
-
         }
+        if (StaticFinalvariable.hintNumber == 0) {
+            hint.setVisible(false);
+        }
+
     }//GEN-LAST:event_hintActionPerformed
 
     /**

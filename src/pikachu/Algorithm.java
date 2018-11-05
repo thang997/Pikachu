@@ -6,6 +6,8 @@
 package pikachu;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -13,13 +15,10 @@ import java.awt.Point;
  */
 public class Algorithm {
 
-    Level level1 = new Level();
+    public Level level1 = new Level();
 
     public Algorithm() {
-    }
-
-    public Level getLevel1() {
-        return level1;
+       
     }
 
     //p1 and p2 nam tren cung 1 hang hoac cot dau tien hoac cuoi cung
@@ -224,9 +223,9 @@ public class Algorithm {
         }
         for (int y = pMinY.y + 1; y < pMaxY.y; y++) {
             // check three line
-            if (checkLineX(pMinY.x, pMinY.y, y)
-                    && checkLineY(pMinY.x, pMaxY.x, y)
-                    && checkLineX(pMaxY.x, y, pMaxY.y)) {
+            if (checkLineX(pMinY.x, pMinY.y, y+1)
+                    && checkLineY(pMinY.x-1, pMaxY.x+1, y)
+                    && checkLineX(pMaxY.x, y-1, pMaxY.y)) {
                 return true;
             }
         }
@@ -244,9 +243,9 @@ public class Algorithm {
         }
         // find line and y begin
         for (int x = pMinX.x + 1; x < pMaxX.x; x++) {
-            if (checkLineY(pMinX.x, x, pMinX.y)
-                    && checkLineX(x, pMinX.y, pMaxX.y)
-                    && checkLineY(x, pMaxX.x, pMaxX.y)) {
+            if (checkLineY(pMinX.x, x+1, pMinX.y)
+                    && checkLineX(x, pMinX.y-1, pMaxX.y+1)
+                    && checkLineY(x-1, pMaxX.x, pMaxX.y)) {
                 System.out.println("(" + pMinX.x + "," + pMinX.y + ") -> (" + x
                         + "," + pMinX.y + ") -> (" + x + "," + pMaxX.y
                         + ") -> (" + pMaxX.x + "," + pMaxX.y + ")");
@@ -311,16 +310,16 @@ public class Algorithm {
             pMinX = p2;
             pMaxX = p1;
         }
-        int x = pMaxX.x;
+        int row = pMaxX.x;
         int col = pMinX.y;
 
         if (checkLineY(pMinX.x, pMaxX.x + 1, col)) {
-            while (level1.getValue(x + 1, pMinX.y) == 0
-                    && level1.getValue(x + 1, pMaxX.y) == 0) {
-                if (checkLineX(x + 1, pMinX.y, pMaxX.y)) {
+            while (level1.getValue(row + 1, pMinX.y) == 0
+                    && level1.getValue(row + 1, pMaxX.y) == 0) {
+                if (checkLineX(row + 1, pMinX.y, pMaxX.y)) {
                     return true;
                 }
-                x += 1;
+                row += 1;
             }
         }
         return false;
@@ -532,5 +531,24 @@ public class Algorithm {
 
     public void settohide(Point p1, Point p2) {
         level1.setValue(p1, p2);
+    }
+    
+    public boolean checkToChange() {
+        for (int i = 2; i < 11; i++) {
+            for (int j = 2; j < 18; j++) {
+                if (level1.getValue(i, j) != 0) {
+                    for (int a = 2; a < 11; a++) {
+                        for (int b = 2; b < 18; b++) {
+                            if ((i != a || j != b) && checkTwoPoint(new Point(i, j), new Point(a, b))) {
+                                System.out.println(i + "," + j + "," + a + "," + b);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println("Looxi");
+        return false;
     }
 }

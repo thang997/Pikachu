@@ -105,4 +105,34 @@ public class Level {
         }
         System.out.println(total);
     }  
+    
+    //settting level2
+    public void settinglevel2() {
+        for (int row = 2; row < 11; row++) {
+            for (int column = 2; column < 18; column++) {
+                if (Board[row][column] == 0) {
+                    int temp = row;
+                    do {
+                        Board[temp][column] = Board[temp - 1][column];
+                        temp = temp - 1;
+                    } while (Board[temp - 1][column] != -1);
+                }
+            }
+        }
+    }
+    
+    //settting level3
+    public void settinglevel3() {
+        for (int row = 10; row > 1; row--) {
+            for (int column = 17; column > 1; column--) {
+                if (Board[row][column] == 0) {
+                    int temp = row;
+                    do {
+                        Board[temp][column] = Board[temp + 1][column];
+                        temp = temp + 1;
+                    } while (Board[temp + 1][column] != -1);
+                }
+            }
+        }
+    }
 }
