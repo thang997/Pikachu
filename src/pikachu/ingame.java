@@ -8,6 +8,7 @@ package pikachu;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Point;
@@ -50,8 +51,6 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         setTitle("Pikachu Game");
         setLocationRelativeTo(null);
         MyGridLayout();
-        BigLayout();
-        SmallLayout();
         MyButtons();
         MyLabel();
         //newgame.setEnabled(false);
@@ -74,7 +73,6 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                 if (!blnPause) {
                     count = (float) (count - 0.2);
                     progesstime.setValue((int) count);
-                    progesstime.setStringPainted(true);
                 }
                 if (count == 0) {
                     int click = JOptionPane.showConfirmDialog(null, "Do you wanna play again?", "Question", JOptionPane.YES_NO_OPTION);
@@ -120,17 +118,27 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         int y = Integer.parseInt(btnIndex.substring(indexDot + 1,
                 btnIndex.length()));
         if (p1 == null) {
+            for (int i = 2; i < 11; i++) {
+                for (int j = 2; j < 18; j++) {
+                    btn[i][j].setBorder(null);
+                }
+            }
             p1 = new Point(x, y);
-            btn[p1.x][p1.y].setBorder(new LineBorder(Color.red));
+            btn[p1.x][p1.y].setBorder(new LineBorder(Color.red, 5));
         } else {
+            for (int i = 2; i < 11; i++) {
+                for (int j = 2; j < 18; j++) {
+                    btn[i][j].setBorder(null);
+                }
+            }
             p2 = new Point(x, y);
             if (algorithm.checkTwoPoint(p1, p2) && !p1.equals(p2)) {
-                btn[p2.x][p2.y].setBorder(new LineBorder(Color.red));
+                btn[p2.x][p2.y].setBorder(new LineBorder(Color.red, 5));
                 algorithm.settohide(p1, p2);
                 total -= 2;
                 StaticFinalvariable.TotalPoint += 10;
-                diem.setText("Điểm: " + StaticFinalvariable.TotalPoint);
-                
+                diem.setText("Score: " + StaticFinalvariable.TotalPoint);
+
                 if (StaticFinalvariable.Level == 1) {
                     btn[p1.x][p1.y].setVisible(false);
                     btn[p2.x][p2.y].setVisible(false);
@@ -144,7 +152,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                             if (a == 0) {
                                 btn[i][j].setVisible(false);
                             } else {
-                                btn[i][j].setActionCommand(i + "," + j);                              
+                                btn[i][j].setActionCommand(i + "," + j);
                                 btn[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/imgpikachu/" + a + ".jpg")));
 
                             }
@@ -160,7 +168,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                             if (a == 0) {
                                 btn[i][j].setVisible(false);
                             } else {
-                                btn[i][j].setActionCommand(i + "," + j);                               
+                                btn[i][j].setActionCommand(i + "," + j);
                                 btn[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/imgpikachu/" + a + ".jpg")));
 
                             }
@@ -179,9 +187,12 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         }
         if (total == 0) {
             StaticFinalvariable.TotalPoint += (count * 5);
-            diem.setText("Điểm: " + StaticFinalvariable.TotalPoint);
+            diem.setText("Score: " + StaticFinalvariable.TotalPoint);
             StaticFinalvariable.Level++;
+            level.setText("Level:" + StaticFinalvariable.Level);
+            layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/" + StaticFinalvariable.Level + ".jpg")));
             if (StaticFinalvariable.Level <= 3) {
+
                 total = 144;
                 count = 100;
                 progesstime.setValue((int) count);
@@ -197,7 +208,37 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                     }
                 }
             } else {
-                System.out.println("You are Victory");
+                int click = JOptionPane.showConfirmDialog(null, "Do you wanna play again?", "Question", JOptionPane.YES_NO_OPTION);
+                if (click == JOptionPane.YES_OPTION) {
+                    for (int i = 2; i < 11; i++) {
+                        for (int j = 2; j < 18; j++) {
+                            btn[i][j].setBorder(null);
+                        }
+                    }
+                    total = 144;
+                    StaticFinalvariable.Level = 1;
+                    StaticFinalvariable.hintNumber = 3;
+                    StaticFinalvariable.TotalPoint = 0;
+                    level.setText("Level:" + StaticFinalvariable.Level);
+                    diem.setText("Score: " + StaticFinalvariable.TotalPoint);
+                    counthint.setText(String.valueOf(StaticFinalvariable.hintNumber));
+                    count = 100;
+                    progesstime.setValue((int) count);
+                    t.start();
+                    algorithm = new Algorithm();
+                    Change();
+                    for (int i = 2; i < 11; i++) {
+                        for (int j = 2; j < 18; j++) {
+                            btn[i][j].setVisible(true);
+                            int a = algorithm.level1.getValue(i, j);
+                            btn[i][j].setActionCommand(i + "," + j);
+                            btn[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/imgpikachu/" + a + ".jpg")));
+                        }
+                    }
+                }
+                if(click==JOptionPane.NO_OPTION){
+                    System.exit(0);
+                }
             }
         }
     }
@@ -218,9 +259,9 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             Random random = new Random();
             do {
                 int number = random.nextInt(countNumber);
-                algorithm.level1.setValuewhenChange(listPoint.get(countNumber-1).x,
-                        listPoint.get(countNumber-1).y, listValue.get(number));
-                listPoint.remove(countNumber-1);
+                algorithm.level1.setValuewhenChange(listPoint.get(countNumber - 1).x,
+                        listPoint.get(countNumber - 1).y, listValue.get(number));
+                listPoint.remove(countNumber - 1);
                 listValue.remove(number);
                 countNumber--;
             } while (countNumber > 0);
@@ -236,22 +277,19 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         }
     }
 
-    public void BigLayout() {
-        layout.setSize(850, 600);
-    }
-
-    public void SmallLayout() {
-        layoutpikachu.setBackground(null);
-        layoutpikachu.setSize(700, 400);
-    }
-
     public void MyButtons() {
-        hint.setSize(50, 50);
+
     }
 
     public void MyLabel() {
-        diem.setLocation(700, 20);
-        diem.setText("Điểm:");
+        layout.setSize(850, 600);
+        layoutpikachu.setBackground(null);
+        layoutpikachu.setSize(700, 400);
+        diem.setLocation(600, -7);
+        layouttroll.setVisible(false);
+        layouttroll.setSize(300, 300);
+        layouttroll.setLocation(250, 150);
+        layouttroll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/troll.jpg")));
     }
 
     /**
@@ -271,6 +309,9 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         diem = new javax.swing.JLabel();
         hint = new javax.swing.JButton();
         progesstime = new javax.swing.JProgressBar();
+        counthint = new javax.swing.JLabel();
+        layouttroll = new javax.swing.JLabel();
+        level = new javax.swing.JLabel();
         layout = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -309,9 +350,10 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         getContentPane().add(pause);
         pause.setBounds(10, 190, 80, 30);
 
-        time.setText("Thời gian");
+        time.setFont(new java.awt.Font("MV Boli", 0, 40)); // NOI18N
+        time.setText("Time");
         getContentPane().add(time);
-        time.setBounds(120, 20, 70, 16);
+        time.setBounds(20, 0, 110, 50);
 
         score.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/score.png"))); // NOI18N
         score.addActionListener(new java.awt.event.ActionListener() {
@@ -322,9 +364,10 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         getContentPane().add(score);
         score.setBounds(10, 230, 80, 30);
 
-        diem.setText("Điểm: 0");
+        diem.setFont(new java.awt.Font("MV Boli", 0, 40)); // NOI18N
+        diem.setText("Score:0");
         getContentPane().add(diem);
-        diem.setBounds(540, 20, 70, 16);
+        diem.setBounds(0, 20, 590, 65);
 
         hint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/hint.png"))); // NOI18N
         hint.addActionListener(new java.awt.event.ActionListener() {
@@ -333,9 +376,21 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(hint);
-        hint.setBounds(20, 340, 50, 20);
+        hint.setBounds(10, 320, 80, 30);
         getContentPane().add(progesstime);
-        progesstime.setBounds(180, 10, 400, 30);
+        progesstime.setBounds(130, 10, 450, 30);
+
+        counthint.setFont(new java.awt.Font("MV Boli", 0, 20)); // NOI18N
+        counthint.setText("3");
+        getContentPane().add(counthint);
+        counthint.setBounds(40, 340, 60, 40);
+        getContentPane().add(layouttroll);
+        layouttroll.setBounds(60, 320, 90, 110);
+
+        level.setFont(new java.awt.Font("MV Boli", 0, 30)); // NOI18N
+        level.setText("Level:1");
+        getContentPane().add(level);
+        level.setBounds(10, 80, 120, 40);
 
         layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/Sleep-Pikachu-Pokemon-Wallpaper.png"))); // NOI18N
         getContentPane().add(layout);
@@ -356,10 +411,18 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
 
         int click = JOptionPane.showConfirmDialog(null, "Do you wanna play a new game", "Question", JOptionPane.YES_NO_OPTION);
         if (click == JOptionPane.YES_OPTION) {
+            for (int i = 2; i < 11; i++) {
+                for (int j = 2; j < 18; j++) {
+                    btn[i][j].setBorder(null);
+                }
+            }
+            total = 144;
             StaticFinalvariable.Level = 1;
             StaticFinalvariable.hintNumber = 3;
             StaticFinalvariable.TotalPoint = 0;
-            diem.setText("Điểm: " + StaticFinalvariable.TotalPoint);
+            level.setText("Level:" + StaticFinalvariable.Level);
+            diem.setText("Score: " + StaticFinalvariable.TotalPoint);
+            counthint.setText(String.valueOf(StaticFinalvariable.hintNumber));
             count = 100;
             progesstime.setValue((int) count);
             t.start();
@@ -382,9 +445,11 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         if (blnPause) {
             pause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/resume.png")));
             layoutpikachu.setVisible(false);
+            layouttroll.setVisible(true);
         } else {
             pause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/pause.png")));
             layoutpikachu.setVisible(true);
+            layouttroll.setVisible(false);
         }
 
     }//GEN-LAST:event_pauseActionPerformed
@@ -392,6 +457,13 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     private void hintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hintActionPerformed
         // TODO add your handling code here:
         if (StaticFinalvariable.hintNumber > 0) {
+            p1 = null;
+            p2 = null;
+            for (int i = 2; i < 11; i++) {
+                for (int j = 2; j < 18; j++) {
+                    btn[i][j].setBorder(null);
+                }
+            }
             StaticFinalvariable.hintNumber--;
             int hint = 0;
             for (int i = 2; i < 11; i++) {
@@ -400,8 +472,11 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                         for (int a = 2; a < 11; a++) {
                             for (int b = 2; b < 18; b++) {
                                 if ((i != a || j != b) && algorithm.checkTwoPoint(new Point(i, j), new Point(a, b))) {
+                                    btn[a][b].setBorder(new LineBorder(Color.red, 5));
+                                    btn[i][j].setBorder(new LineBorder(Color.red, 5));
                                     System.out.println("(" + i + "," + j + ")," + "(" + a + "," + b + ")");
                                     hint++;
+                                    counthint.setText(String.valueOf(StaticFinalvariable.hintNumber));
                                     break;
                                 }
                             }
@@ -420,7 +495,8 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         }
         if (StaticFinalvariable.hintNumber == 0) {
-            hint.setVisible(false);
+            hint.setEnabled(false);
+            counthint.setVisible(false);
         }
 
     }//GEN-LAST:event_hintActionPerformed
@@ -462,10 +538,13 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel counthint;
     private javax.swing.JLabel diem;
     private javax.swing.JButton hint;
     private javax.swing.JLabel layout;
     private javax.swing.JPanel layoutpikachu;
+    private javax.swing.JLabel layouttroll;
+    private javax.swing.JLabel level;
     private javax.swing.JButton newgame;
     private javax.swing.JButton pause;
     private javax.swing.JProgressBar progesstime;

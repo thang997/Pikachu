@@ -54,7 +54,7 @@ public class Level {
         for(int row=2;row<11;row++){
             for(int column=2;column<18;column++){
                 if(Board[row][column]==0){
-                    Board[row][column] = random.nextInt(27)+1;
+                    Board[row][column] = random.nextInt(1)+1;
                     int count=0;
                     for(int a=2;a<11;a++){
                         for(int b=2;b<18;b++){
