@@ -5,23 +5,36 @@
  */
 package pikachu;
 
+import sun.audio.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.java2d.loops.DrawLine;
 
 /**
  *
@@ -34,8 +47,6 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     private static int total = 144;
     Point p1 = null;
     Point p2 = null;
-    private static int r;
-    private static int c;
     private boolean blnPause;
     private float count = 100;
     private Timer t;
@@ -51,10 +62,8 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         setTitle("Pikachu Game");
         setLocationRelativeTo(null);
         MyGridLayout();
-        MyButtons();
         MyLabel();
-        //newgame.setEnabled(false);
-//        reset.setEnabled(false);
+
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (ClassNotFoundException ex) {
@@ -126,23 +135,33 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             p1 = new Point(x, y);
             btn[p1.x][p1.y].setBorder(new LineBorder(Color.red, 5));
         } else {
+            int countBorder = 0;
             for (int i = 2; i < 11; i++) {
                 for (int j = 2; j < 18; j++) {
-                    btn[i][j].setBorder(null);
+                    if (btn[i][j].getBorder() != null) {
+                        countBorder++;
+                    }
                 }
             }
+            if (countBorder > 1) {
+                for (int i = 2; i < 11; i++) {
+                    for (int j = 2; j < 18; j++) {
+                        btn[i][j].setBorder(null);
+                    }
+                }
+            }
+            countBorder = 0;
             p2 = new Point(x, y);
             if (algorithm.checkTwoPoint(p1, p2) && !p1.equals(p2)) {
                 btn[p2.x][p2.y].setBorder(new LineBorder(Color.red, 5));
-                algorithm.settohide(p1, p2);
                 total -= 2;
                 StaticFinalvariable.TotalPoint += 10;
                 diem.setText("Score: " + StaticFinalvariable.TotalPoint);
+                algorithm.settohide(p1, p2);
                 if (StaticFinalvariable.Level == 1) {
                     btn[p1.x][p1.y].setVisible(false);
                     btn[p2.x][p2.y].setVisible(false);
                 }
-
                 if (StaticFinalvariable.Level == 2) {
                     algorithm.level1.settinglevel2();
                     for (int i = 2; i < 11; i++) {
@@ -241,6 +260,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+
     private void Change() {
         if (!algorithm.checkToChange()) {
             ArrayList<Point> listPoint = new ArrayList<>();
@@ -273,10 +293,6 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
             Change();
         }
-    }
-
-    public void MyButtons() {
-
     }
 
     public void MyLabel() {
