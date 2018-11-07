@@ -63,7 +63,7 @@ public class beforegame extends javax.swing.JFrame {
         user.setFont(new java.awt.Font("MV Boli", 0, 20)); // NOI18N
         user.setText("Welcome to pikachu");
         getContentPane().add(user);
-        user.setBounds(10, -10, 260, 40);
+        user.setBounds(10, -10, 380, 40);
 
         scoreall.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/score.png"))); // NOI18N
         scoreall.addActionListener(new java.awt.event.ActionListener() {

@@ -25,7 +25,7 @@ public class FormRegis extends javax.swing.JFrame {
 
     private String url;
     private final String user = "admin";
-    private final String password = "thang123";
+    private final String password = "123456";
     java.sql.Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;

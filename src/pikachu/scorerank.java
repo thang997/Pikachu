@@ -28,7 +28,7 @@ public class scorerank extends javax.swing.JFrame {
      */
     private String url;
     private final String user = "admin";
-    private final String password = "thang123";
+    private final String password = "123456";
     Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;
@@ -61,10 +61,13 @@ public class scorerank extends javax.swing.JFrame {
     void loadDataFromDB() {
         try {
             ip = InetAddress.getLocalHost();
-            url = "jdbc:mysql://"+ip.getHostAddress()+"/scorerank?useSSL=false";
+            url = "jdbc:mysql://" + ip.getHostAddress() + "/scorerank?useSSL=false";
             connection = DriverManager.getConnection(url, user, password);
             stmt = connection.createStatement();
-            rs = stmt.executeQuery("select * from diem where ten="+StaticFinalvariable.user.getUser());
+            String sql = "select * from diem where ten=?";
+            pStmt = connection.prepareStatement(sql);
+            pStmt.setString(1,StaticFinalvariable.user.getUser());
+            rs = pStmt.executeQuery();
             while (rs.next()) {
                 Object rows[] = new Object[3];
                 rows[0] = rs.getString(1);
