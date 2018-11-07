@@ -7,36 +7,35 @@ package pikachu;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Thang
  */
-public class scorerank extends javax.swing.JFrame {
+public class scoreall extends javax.swing.JFrame {
 
     /**
-     * Creates new form scorerank
+     * Creates new form scoreall
      */
     private String url;
     private final String user = "admin";
     private final String password = "thang123";
-    Connection connection = null;
+    java.sql.Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;
     PreparedStatement pStmt = null;
     DefaultTableModel model;
     InetAddress ip;
 
-    public scorerank() {
+    public scoreall() {
         initComponents();
         setSize(300, 400);
         setTitle("High Score");
@@ -64,7 +63,7 @@ public class scorerank extends javax.swing.JFrame {
             url = "jdbc:mysql://"+ip.getHostAddress()+"/scorerank?useSSL=false";
             connection = DriverManager.getConnection(url, user, password);
             stmt = connection.createStatement();
-            rs = stmt.executeQuery("select * from diem where ten="+StaticFinalvariable.user.getUser());
+            rs = stmt.executeQuery("select * from diem");
             while (rs.next()) {
                 Object rows[] = new Object[3];
                 rows[0] = rs.getString(1);
@@ -73,9 +72,9 @@ public class scorerank extends javax.swing.JFrame {
                 model.addRow(rows);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(scorerank.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(scorerank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (UnknownHostException ex) {
-            Logger.getLogger(scorerank.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(scorerank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
 
@@ -111,16 +110,15 @@ public class scorerank extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 25, Short.MAX_VALUE))
         );
 
         pack();
@@ -128,7 +126,38 @@ public class scorerank extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
-     */
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(scoreall.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(scoreall.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(scoreall.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(scoreall.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new scoreall().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

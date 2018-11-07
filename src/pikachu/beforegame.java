@@ -19,7 +19,6 @@ public class beforegame extends javax.swing.JFrame {
         setResizable(false);
         setSize(430,330);
         setLocationRelativeTo(null);
-        jPanel1.setVisible(false);
         setTitle("Pikachu");
         user.setText("Welcome to pikachu, "+StaticFinalvariable.user.getUser());
   
@@ -36,13 +35,8 @@ public class beforegame extends javax.swing.JFrame {
 
         batdau = new javax.swing.JButton();
         tieptuc = new javax.swing.JButton();
-        huongdan = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        quaylai = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         user = new javax.swing.JLabel();
+        scoreall = new javax.swing.JButton();
         layout = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,45 +60,19 @@ public class beforegame extends javax.swing.JFrame {
         getContentPane().add(tieptuc);
         tieptuc.setBounds(60, 70, 80, 30);
 
-        huongdan.setBackground(new java.awt.Color(255, 153, 0));
-        huongdan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/guide.png"))); // NOI18N
-        huongdan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                huongdanActionPerformed(evt);
-            }
-        });
-        getContentPane().add(huongdan);
-        huongdan.setBounds(60, 110, 80, 30);
-
-        jPanel1.setLayout(null);
-
-        quaylai.setText("Quay Lại");
-        quaylai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quaylaiActionPerformed(evt);
-            }
-        });
-        jPanel1.add(quaylai);
-        quaylai.setBounds(200, 150, 90, 30);
-
-        jLabel1.setText("Hướng Dẫn");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(120, 10, 80, 14);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Nhiệm vụ của bạn rất đơn giản , chỉ cần tìm hai hình giống nhau và đường nối giữa 2 hình đó gấp khúc không quá 2 lần, click vào để loại bỏ chúng.\nMỗi lần loại bỏ được 2 hình bạn sẽ ghi điểm, trò chơi hoàn thành khi bạn loại bỏ được hết các hình trươc khi hết giờ, thời gian còn lại càng nhiều điểm của bạn càng cao.\nKhi không còn nước di chuyển trờ chơi sẽ tự động đảo lại hình, số lần đảo là giới hạn. Khi kết thúc trờ chơi điểm số sẽ được cộng thêm số lần đảo.\n");
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 40, 270, 100);
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(40, 20, 300, 180);
-
+        user.setFont(new java.awt.Font("MV Boli", 0, 20)); // NOI18N
         user.setText("Welcome to pikachu");
         getContentPane().add(user);
-        user.setBounds(110, 0, 250, 14);
+        user.setBounds(10, -10, 260, 40);
+
+        scoreall.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/score.png"))); // NOI18N
+        scoreall.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scoreallActionPerformed(evt);
+            }
+        });
+        getContentPane().add(scoreall);
+        scoreall.setBounds(60, 110, 80, 30);
 
         layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/layout.jpg"))); // NOI18N
         getContentPane().add(layout);
@@ -112,14 +80,6 @@ public class beforegame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void huongdanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_huongdanActionPerformed
-        // TODO add your handling code here:
-        jPanel1.setVisible(true);
-        batdau.setVisible(false);
-        tieptuc.setVisible(false);
-        huongdan.setVisible(false);
-    }//GEN-LAST:event_huongdanActionPerformed
 
     private void batdauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batdauActionPerformed
         // TODO add your handling code here:
@@ -130,13 +90,12 @@ public class beforegame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_batdauActionPerformed
 
-    private void quaylaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quaylaiActionPerformed
+    private void scoreallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scoreallActionPerformed
         // TODO add your handling code here:
-        jPanel1.setVisible(false);
-           batdau.setVisible(true);
-        tieptuc.setVisible(true);
-        huongdan.setVisible(true);
-    }//GEN-LAST:event_quaylaiActionPerformed
+        scoreall sa = new scoreall();
+        sa.setVisible(true);
+        
+    }//GEN-LAST:event_scoreallActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,13 +134,8 @@ public class beforegame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton batdau;
-    private javax.swing.JButton huongdan;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel layout;
-    private javax.swing.JButton quaylai;
+    private javax.swing.JButton scoreall;
     private javax.swing.JButton tieptuc;
     private javax.swing.JLabel user;
     // End of variables declaration//GEN-END:variables

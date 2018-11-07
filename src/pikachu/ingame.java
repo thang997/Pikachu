@@ -21,6 +21,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
@@ -34,6 +39,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.border.LineBorder;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
@@ -45,6 +51,7 @@ import sun.java2d.loops.DrawLine;
  */
 public class ingame extends javax.swing.JFrame implements ActionListener {
 
+    int stt = 1;
     private Algorithm algorithm;
     private JButton[][] btn;
     private static int total = 144;
@@ -54,6 +61,14 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     private int count = 100;
     private Timer t;
     private GridLayout grid;
+    private String url;
+    private final String user = "admin";
+    private final String password = "thang123";
+    java.sql.Connection connection = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+    PreparedStatement pStmt = null;
+    InetAddress ip;
 
     /*
      * Creates new form ingame
@@ -87,7 +102,9 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                     progesstime.setValue(count);
                 }
                 if (count == 0) {
-                    int click = JOptionPane.showConfirmDialog(null, "Do you wanna play again?", "Question", JOptionPane.YES_NO_OPTION);
+                    int click = JOptionPane.showConfirmDialog(null, "\t"
+                            + "You Lose!!!!\n"
+                            + "Do you wanna play again?", "Question", JOptionPane.YES_NO_OPTION);
                     if (click == JOptionPane.YES_OPTION) {
                         count = 100;
                         progesstime.setValue((int) count);
@@ -198,7 +215,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                     }
                 }
 
-            }else{
+            } else {
                 musicFail();
             }
             btn[p1.x][p1.y].setBorder(null);
@@ -231,7 +248,21 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                     }
                 }
             } else {
-                int click = JOptionPane.showConfirmDialog(null, "Do you wanna play again?", "Question", JOptionPane.YES_NO_OPTION);
+                try {
+                    ip = InetAddress.getLocalHost();
+                    url = "jdbc:mysql://" + ip.getHostAddress() + "/scorerank?useSSL=false";
+                    connection = DriverManager
+                            .getConnection(url, user, password);
+                    String sql = "INSERT INTO diem VALUES(?,?,?);";
+                    pStmt = connection.prepareStatement(sql);
+                    pStmt.setInt(1, stt);
+                    pStmt.setString(2, StaticFinalvariable.user.getUser());
+                    pStmt.setInt(3, StaticFinalvariable.TotalPoint);
+                } catch (Exception error) {
+                    JOptionPane.showMessageDialog(null, error);
+                }
+                int click = JOptionPane.showConfirmDialog(null, "\tYou Win\n"
+                        + "Do you wanna play again?", "Question", JOptionPane.YES_NO_OPTION);
                 if (click == JOptionPane.YES_OPTION) {
                     for (int i = 2; i < 11; i++) {
                         for (int j = 2; j < 18; j++) {
@@ -265,17 +296,17 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         }
     }
-    
-    private void musicSuccess(){      
+
+    private void musicSuccess() {
         JFXPanel j = new JFXPanel();
         String uri = new File("ting.mp3").toURI().toString();
-        new MediaPlayer(new Media(uri)).play();   
+        new MediaPlayer(new Media(uri)).play();
     }
-    
-    private void musicFail(){      
+
+    private void musicFail() {
         JFXPanel j = new JFXPanel();
         String uri = new File("te.mp3").toURI().toString();
-        new MediaPlayer(new Media(uri)).play();   
+        new MediaPlayer(new Media(uri)).play();
     }
 
     private void Change() {
@@ -434,7 +465,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
         scorerank sr = new scorerank();
         sr.setVisible(true);
-
+        
     }//GEN-LAST:event_scoreActionPerformed
 
     private void newgameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newgameActionPerformed
