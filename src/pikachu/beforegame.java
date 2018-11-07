@@ -20,7 +20,8 @@ public class beforegame extends javax.swing.JFrame {
         setSize(430,330);
         setLocationRelativeTo(null);
         jPanel1.setVisible(false);
-
+        setTitle("Pikachu");
+        user.setText("Welcome to pikachu, "+StaticFinalvariable.user.getUser());
   
     }
 
@@ -41,6 +42,7 @@ public class beforegame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        user = new javax.swing.JLabel();
         layout = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -99,6 +101,10 @@ public class beforegame extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(40, 20, 300, 180);
+
+        user.setText("Welcome to pikachu");
+        getContentPane().add(user);
+        user.setBounds(110, 0, 250, 14);
 
         layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/layout.jpg"))); // NOI18N
         getContentPane().add(layout);
@@ -177,5 +183,6 @@ public class beforegame extends javax.swing.JFrame {
     private javax.swing.JLabel layout;
     private javax.swing.JButton quaylai;
     private javax.swing.JButton tieptuc;
+    private javax.swing.JLabel user;
     // End of variables declaration//GEN-END:variables
 }

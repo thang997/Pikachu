@@ -27,6 +27,9 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -48,7 +51,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     Point p1 = null;
     Point p2 = null;
     private boolean blnPause;
-    private float count = 100;
+    private int count = 100;
     private Timer t;
     private GridLayout grid;
 
@@ -76,12 +79,12 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             Logger.getLogger(ingame.class.getName()).log(Level.SEVERE, null, ex);
         }
         progesstime.setValue((int) count);
-        t = new Timer(1000, new ActionListener() {
+        t = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!blnPause) {
-                    count = (float) (count - 0.2);
-                    progesstime.setValue((int) count);
+                    count = count - 1;
+                    progesstime.setValue(count);
                 }
                 if (count == 0) {
                     int click = JOptionPane.showConfirmDialog(null, "Do you wanna play again?", "Question", JOptionPane.YES_NO_OPTION);
@@ -153,6 +156,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             countBorder = 0;
             p2 = new Point(x, y);
             if (algorithm.checkTwoPoint(p1, p2) && !p1.equals(p2)) {
+                musicSuccess();
                 btn[p2.x][p2.y].setBorder(new LineBorder(Color.red, 5));
                 total -= 2;
                 StaticFinalvariable.TotalPoint += 10;
@@ -194,6 +198,8 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                     }
                 }
 
+            }else{
+                musicFail();
             }
             btn[p1.x][p1.y].setBorder(null);
             btn[p2.x][p2.y].setBorder(null);
@@ -259,7 +265,18 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         }
     }
-
+    
+    private void musicSuccess(){      
+        JFXPanel j = new JFXPanel();
+        String uri = new File("ting.mp3").toURI().toString();
+        new MediaPlayer(new Media(uri)).play();   
+    }
+    
+    private void musicFail(){      
+        JFXPanel j = new JFXPanel();
+        String uri = new File("te.mp3").toURI().toString();
+        new MediaPlayer(new Media(uri)).play();   
+    }
 
     private void Change() {
         if (!algorithm.checkToChange()) {

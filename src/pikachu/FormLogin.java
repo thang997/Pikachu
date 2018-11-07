@@ -5,6 +5,7 @@
  */
 package pikachu;
 
+import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,15 +19,14 @@ import javax.swing.JOptionPane;
  */
 public class FormLogin extends javax.swing.JFrame {
 
-    private final String url = "jdbc:mysql://localhost:3306/login?useSSL=false";
-    private final String user = "root";
-    private final String password = "";
-    boolean connectsuccess = false;
-    String getUser;
+    private String url;
+    private final String user = "admin";
+    private final String password = "123456";
     Connection connection = null;
     Statement stmt = null;
     ResultSet rs = null;
     PreparedStatement pStmt = null;
+    InetAddress ip;
 
     /**
      * Creates new form FormLogin
@@ -36,13 +36,26 @@ public class FormLogin extends javax.swing.JFrame {
         setTitle("Form Login");
         setResizable(false);
         setLocationRelativeTo(null);
+        //System.out.println(ip.getHostAddress());
     }
 
     public boolean checkrong() {
-        if (userLogin.getText().equals("") || passLogin.getText().equals("")) {
-            return true;
+        return userLogin.getText().equals("") || passLogin.getText().equals("");
+    }
+
+    private String MD5(String md5) {
+        try {
+           
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+            byte[] array = md.digest(md5.getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < array.length; ++i) {
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
+            }
+            return sb.toString();
+        } catch (java.security.NoSuchAlgorithmException e) {
         }
-        return false;
+        return null;
     }
 
     /**
@@ -75,6 +88,11 @@ public class FormLogin extends javax.swing.JFrame {
         });
 
         jButton2.setText("Register");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,18 +144,21 @@ public class FormLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (checkrong() == true) {
             JOptionPane.showMessageDialog(null, "Please enter user and password");
+           
         } else {
             try {
+                ip = InetAddress.getLocalHost();
+                url = "jdbc:mysql://"+ip.getHostAddress()+"/scorerank?useSSL=false";
                 connection = DriverManager
                         .getConnection(url, user, password);
-                String sql = "select * from user_pwd where myusername=? and mypassword=?";
+                String sql = "select * from login where username=? and password=?";
                 pStmt = connection.prepareStatement(sql);
                 pStmt.setString(1, userLogin.getText());
-                pStmt.setString(2, passLogin.getText());
+                pStmt.setString(2, MD5(passLogin.getText()));
                 rs = pStmt.executeQuery();
                 if (rs.next()) {
-                    connectsuccess = true;
                     this.setVisible(false);
+                    StaticFinalvariable.user.setUser(userLogin.getText());
                     beforegame bf = new beforegame();
                     bf.setVisible(true);
                 } else {
@@ -150,6 +171,13 @@ public class FormLogin extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:v
+        FormRegis fr = new FormRegis();
+        fr.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
