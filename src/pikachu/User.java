@@ -12,15 +12,25 @@ package pikachu;
 public class User {
     String id;
     String user;
+    String link;
 
     public User() {
     }
-     
-    
-    public User(String id, String user) {
+
+    public User(String id, String user, String link) {
         this.id = id;
         this.user = user;
+        this.link = link;
     }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+     
 
     public String getId() {
         return id;

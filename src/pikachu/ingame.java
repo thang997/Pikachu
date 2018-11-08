@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -344,6 +345,8 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     }
 
     public void MyLabel() {
+        name.setText(StaticFinalvariable.user.getUser());
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.user.getLink())).getImage().getScaledInstance(80, 70, Image.SCALE_DEFAULT)));
         layout.setSize(850, 600);
         layoutpikachu.setBackground(null);
         layoutpikachu.setSize(700, 400);
@@ -374,6 +377,8 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         counthint = new javax.swing.JLabel();
         layouttroll = new javax.swing.JLabel();
         level = new javax.swing.JLabel();
+        avatar = new javax.swing.JLabel();
+        name = new javax.swing.JLabel();
         layout = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -447,12 +452,18 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         getContentPane().add(counthint);
         counthint.setBounds(40, 340, 60, 40);
         getContentPane().add(layouttroll);
-        layouttroll.setBounds(60, 320, 90, 110);
+        layouttroll.setBounds(50, 320, 90, 110);
 
         level.setFont(new java.awt.Font("MV Boli", 0, 30)); // NOI18N
         level.setText("Level:1");
         getContentPane().add(level);
         level.setBounds(10, 80, 120, 40);
+        getContentPane().add(avatar);
+        avatar.setBounds(10, 380, 80, 70);
+
+        name.setFont(new java.awt.Font("MV Boli", 0, 20)); // NOI18N
+        getContentPane().add(name);
+        name.setBounds(10, 450, 60, 30);
 
         layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/Sleep-Pikachu-Pokemon-Wallpaper.png"))); // NOI18N
         getContentPane().add(layout);
@@ -465,7 +476,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
         scorerank sr = new scorerank();
         sr.setVisible(true);
-        
+
     }//GEN-LAST:event_scoreActionPerformed
 
     private void newgameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newgameActionPerformed
@@ -600,6 +611,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel avatar;
     private javax.swing.JLabel counthint;
     private javax.swing.JLabel diem;
     private javax.swing.JButton hint;
@@ -607,6 +619,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel layoutpikachu;
     private javax.swing.JLabel layouttroll;
     private javax.swing.JLabel level;
+    private javax.swing.JLabel name;
     private javax.swing.JButton newgame;
     private javax.swing.JButton pause;
     private javax.swing.JProgressBar progesstime;

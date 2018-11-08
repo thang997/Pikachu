@@ -6,7 +6,7 @@
 package pikachu;
 
 import java.awt.Color;
-import javafx.scene.image.Image;
+import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
 
@@ -15,7 +15,7 @@ import javax.swing.border.LineBorder;
  * @author Thang
  */
 public class avatar extends javax.swing.JFrame {
-
+private String link;
     /**
      * Creates new form avatar
      */
@@ -33,10 +33,10 @@ public class avatar extends javax.swing.JFrame {
     }
 
     public void setdata() {
-        anh1.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[0])).getImage()));
-        anh2.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[1])).getImage()));
-        anh3.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[2])).getImage()));
-        anh4.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[3])).getImage()));
+        anh1.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[0])).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+        anh2.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[1])).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+        anh3.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[2])).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+        anh4.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[3])).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
     }
 
     /**
@@ -150,19 +150,23 @@ public class avatar extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
-
+        StaticFinalvariable.user.setLink(link);
+        FormRegis fr = new FormRegis();
+        fr.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_saveActionPerformed
 
     private void anh1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anh1ActionPerformed
         // TODO add your handling code here:
-        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[0])).getImage()));
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[0])).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
+        link=StaticFinalvariable.image[0];
 
     }//GEN-LAST:event_anh1ActionPerformed
 
     private void anh2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anh2ActionPerformed
         // TODO add your handling code here:
-        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[1])).getImage()));
-
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[1])).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
+        link=StaticFinalvariable.image[1];
     }//GEN-LAST:event_anh2ActionPerformed
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
@@ -175,13 +179,14 @@ public class avatar extends javax.swing.JFrame {
 
     private void anh3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anh3ActionPerformed
         // TODO add your handling code here:
-        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[2])).getImage()));
-
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[2])).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
+        link=StaticFinalvariable.image[2];
     }//GEN-LAST:event_anh3ActionPerformed
 
     private void anh4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anh4ActionPerformed
-        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[3])).getImage()));
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[3])).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
         // TODO add your handling code here:
+        link=StaticFinalvariable.image[3];
     }//GEN-LAST:event_anh4ActionPerformed
 
     /**

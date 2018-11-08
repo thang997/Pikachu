@@ -6,6 +6,7 @@
 package pikachu;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.DriverManager;
@@ -15,7 +16,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -41,7 +44,8 @@ public class FormRegis extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Form Register");
         setLocationRelativeTo(null);
-
+        avatar.setBorder(new LineBorder(Color.yellow));
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.user.getLink())).getImage().getScaledInstance(80, 70, Image.SCALE_DEFAULT)));
     }
 
     public boolean check() {
@@ -49,7 +53,7 @@ public class FormRegis extends javax.swing.JFrame {
     }
 
     public boolean check2() {
-        return passlogin.getText().equals(repass.getText());
+        return passlogin.getText()==repass.getText().trim();
     }
 
     private String MD5(String md5) {
@@ -86,6 +90,9 @@ public class FormRegis extends javax.swing.JFrame {
         back = new javax.swing.JButton();
         passlogin = new javax.swing.JPasswordField();
         repass = new javax.swing.JPasswordField();
+        avatar = new javax.swing.JLabel();
+        showpass = new javax.swing.JCheckBox();
+        showpass1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,6 +125,20 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
 
+        showpass.setText("show");
+        showpass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showpassActionPerformed(evt);
+            }
+        });
+
+        showpass1.setText("show");
+        showpass1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showpass1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,16 +156,24 @@ public class FormRegis extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(choose))
+                                .addComponent(choose)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(userlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passlogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(repass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(passlogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(showpass))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(repass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(showpass1))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(112, 112, 112)
                         .addComponent(regis)
                         .addGap(18, 18, 18)
                         .addComponent(back)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {passlogin, repass, userlogin});
@@ -159,20 +188,27 @@ public class FormRegis extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passlogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(showpass))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(repass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(repass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(showpass1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(choose))
-                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(choose))
+                        .addGap(37, 37, 37))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(avatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(regis)
                     .addComponent(back))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {passlogin, repass, userlogin});
@@ -207,18 +243,18 @@ public class FormRegis extends javax.swing.JFrame {
                     url = "jdbc:mysql://" + ip.getHostAddress() + "/scorerank?useSSL=false";
                     connection = DriverManager
                             .getConnection(url, user, password);
-                    String sql = "INSERT INTO login VALUES(?,?);";
+                    String sql = "INSERT INTO login(username, password , linkanh) VALUES(?,?,?);";
                     pStmt = connection.prepareStatement(sql);
                     pStmt.setString(1, userlogin.getText());
                     pStmt.setString(2, MD5(passlogin.getText()));
+                    pStmt.setString(3, StaticFinalvariable.user.getLink());
                     int result = pStmt.executeUpdate();
                     if (result > 0) {
                         JOptionPane.showMessageDialog(null, "Success");
                         FormLogin fl = new FormLogin();
                         fl.setVisible(true);
                         this.setVisible(false);
-                    }
-                    else{
+                    } else {
                         JOptionPane.showMessageDialog(null, "username is exist");
                     }
                 } catch (SQLException ex) {
@@ -230,6 +266,24 @@ public class FormRegis extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_regisActionPerformed
+
+    private void showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showpassActionPerformed
+        // TODO add your handling code here:
+        if (showpass.isSelected()) {
+            passlogin.setEchoChar((char) 0);
+        } else {
+            passlogin.setEchoChar('*');
+        }
+    }//GEN-LAST:event_showpassActionPerformed
+
+    private void showpass1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showpass1ActionPerformed
+        // TODO add your handling code here:
+        if (showpass1.isSelected()) {
+            repass.setEchoChar((char) 0);
+        } else {
+            repass.setEchoChar('*');
+        }
+    }//GEN-LAST:event_showpass1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,6 +321,7 @@ public class FormRegis extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel avatar;
     private javax.swing.JButton back;
     private javax.swing.JButton choose;
     private javax.swing.JLabel jLabel1;
@@ -276,6 +331,8 @@ public class FormRegis extends javax.swing.JFrame {
     private javax.swing.JPasswordField passlogin;
     private javax.swing.JButton regis;
     private javax.swing.JPasswordField repass;
+    private javax.swing.JCheckBox showpass;
+    private javax.swing.JCheckBox showpass1;
     private javax.swing.JTextField userlogin;
     // End of variables declaration//GEN-END:variables
 }
