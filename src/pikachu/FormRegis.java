@@ -55,6 +55,26 @@ public class FormRegis extends javax.swing.JFrame {
     public boolean check2() {
         return passlogin.getText()==repass.getText().trim();
     }
+       public boolean check3() {
+        try {
+            ip = InetAddress.getLocalHost();
+            url = "jdbc:mysql://" + ip.getHostAddress() + "/scorerank?useSSL=false";
+            connection = DriverManager
+                    .getConnection(url, user, password);
+            String sql = "select username from login where username = ?";
+            pStmt = connection.prepareStatement(sql);
+            pStmt.setString(1, userlogin.getText());
+            rs = pStmt.executeQuery();
+            if (!rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FormRegis.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(FormRegis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
     private String MD5(String md5) {
         try {
@@ -220,6 +240,7 @@ public class FormRegis extends javax.swing.JFrame {
         // TODO add your handling code here:
         avatar a = new avatar();
         a.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_chooseActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -237,29 +258,38 @@ public class FormRegis extends javax.swing.JFrame {
             if (check2() == true) {
                 JOptionPane.showMessageDialog(null, "re-password is not match");
             } else {
-                try {
-                    ip = InetAddress.getLocalHost();
-                    url = "jdbc:mysql://" + ip.getHostAddress() + "/scorerank?useSSL=false";
-                    connection = DriverManager
-                            .getConnection(url, user, password);
-                    String sql = "INSERT INTO login(username, password , linkanh) VALUES(?,?,?);";
-                    pStmt = connection.prepareStatement(sql);
-                    pStmt.setString(1, userlogin.getText());
-                    pStmt.setString(2, MD5(passlogin.getText()));
-                    pStmt.setString(3, StaticFinalvariable.user.getLink());
-                    int result = pStmt.executeUpdate();
-                    if (result > 0) {
-                        JOptionPane.showMessageDialog(null, "Success");
-                        FormLogin fl = new FormLogin();
-                        fl.setVisible(true);
-                        this.setVisible(false);
-                    } else {
+                if (passlogin.getText().length()<8) {
+                    JOptionPane.showMessageDialog(null, "your password is too short");
+                } else {
+                    if (check3() == true) {
+                        try {
+                            ip = InetAddress.getLocalHost();
+                            url = "jdbc:mysql://" + ip.getHostAddress() + "/scorerank?useSSL=false";
+                            connection = DriverManager
+                                    .getConnection(url, user, password);
+                            String sql = "INSERT INTO login(username, password , linkanh) VALUES(?,?,?);";
+                            pStmt = connection.prepareStatement(sql);
+                            pStmt.setString(1, userlogin.getText());
+                            pStmt.setString(2, MD5(passlogin.getText()));
+                            pStmt.setString(3, StaticFinalvariable.user.getLink());
+                            int result = pStmt.executeUpdate();
+                            if (result > 0) {
+                                JOptionPane.showMessageDialog(null, "Success");
+                                FormLogin fl = new FormLogin();
+                                fl.setVisible(true);
+                                this.setVisible(false);
+                            } else {
+                                JOptionPane.showMessageDialog(null,"Something wrong!!!");
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(FormRegis.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (UnknownHostException ex) {
+                            Logger.getLogger(FormRegis.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    else{
                         JOptionPane.showMessageDialog(null, "username is exist");
                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(FormRegis.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (UnknownHostException ex) {
-                    Logger.getLogger(FormRegis.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -284,40 +314,6 @@ public class FormRegis extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_showpass1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(FormRegis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(FormRegis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(FormRegis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(FormRegis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new FormRegis().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel avatar;

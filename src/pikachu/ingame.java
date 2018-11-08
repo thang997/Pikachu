@@ -5,14 +5,7 @@
  */
 package pikachu;
 
-import sun.audio.*;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
@@ -20,33 +13,20 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.InetAddress;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Random;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.*;
-import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.border.LineBorder;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.java2d.loops.DrawLine;
 
 /**
  *
@@ -75,7 +55,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     /*
      * Creates new form ingame
      */
-    public ingame() {
+    public ingame() {     
         initComponents();
         setSize(850, 600);
         setResizable(false);
@@ -83,16 +63,11 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         setLocationRelativeTo(null);
         MyGridLayout();
         MyLabel();
-
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ingame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(ingame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(ingame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(ingame.class.getName()).log(Level.SEVERE, null, ex);
         }
         progesstime.setValue((int) count);
@@ -607,56 +582,21 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_hintActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
-//       int click= JOptionPane.showConfirmDialog(null, "Do you wanna save the game?","Question",JOptionPane.YES_NO_OPTION);
-//       if(click == JOptionPane.YES_OPTION){
-//           
-//       }
-//       if(click==JOptionPane.NO_OPTION){
-//           System.exit(0);
-//       }
+         
+       int click= JOptionPane.showConfirmDialog(this, "Do you wanna exit game?","Question",JOptionPane.YES_NO_OPTION);
+       if(click == JOptionPane.YES_OPTION){
+           this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+
+       }
+       if(click==JOptionPane.NO_OPTION){
+           
+       }
     }//GEN-LAST:event_formWindowClosing
 
     private void hintMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hintMouseClicked
         // TODO add your handling code here:
        
     }//GEN-LAST:event_hintMouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ingame().setVisible(true);
-
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel avatar;
