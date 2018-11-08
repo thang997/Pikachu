@@ -50,7 +50,7 @@ public class scorerank extends javax.swing.JFrame {
 
     private void showData() {
         model = new DefaultTableModel();
-        model.addColumn("ID");
+        model.addColumn("Rank");
         model.addColumn("Username");
         model.addColumn("Score");
         jTable1.setModel(model);
@@ -59,20 +59,22 @@ public class scorerank extends javax.swing.JFrame {
     }
 
     void loadDataFromDB() {
+        
         try {
             ip = InetAddress.getLocalHost();
             url = "jdbc:mysql://" + ip.getHostAddress() + "/scorerank?useSSL=false";
             connection = DriverManager.getConnection(url, user, password);
             stmt = connection.createStatement();
-            String sql = "select * from diem where ten=?";
+            String sql = "select ten,diem from diem where ten=? order by diem desc limit 10";
             pStmt = connection.prepareStatement(sql);
             pStmt.setString(1,StaticFinalvariable.user.getUser());
             rs = pStmt.executeQuery();
+            int i=1;
             while (rs.next()) {
                 Object rows[] = new Object[3];
-                rows[0] = rs.getString(1);
-                rows[1] = rs.getString(2);
-                rows[2] = rs.getString(3);
+                rows[0] = i++;
+                rows[1] = rs.getString(1);
+                rows[2] = rs.getString(2);
                 model.addRow(rows);
             }
         } catch (SQLException ex) {

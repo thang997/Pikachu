@@ -15,6 +15,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -52,7 +53,6 @@ import sun.java2d.loops.DrawLine;
  */
 public class ingame extends javax.swing.JFrame implements ActionListener {
 
-    int stt = 1;
     private Algorithm algorithm;
     private JButton[][] btn;
     private static int total = 144;
@@ -103,6 +103,19 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                     progesstime.setValue(count);
                 }
                 if (count == 0) {
+                    try {
+                        ip = InetAddress.getLocalHost();
+                        url = "jdbc:mysql://" + ip.getHostAddress() + "/scorerank?useSSL=false";
+                        connection = DriverManager
+                                .getConnection(url, user, password);
+                        String sql = "INSERT INTO diem(ten,diem) VALUES(?,?);";
+                        pStmt = connection.prepareStatement(sql);
+                        pStmt.setString(1, StaticFinalvariable.user.getUser());
+                        pStmt.setInt(2, StaticFinalvariable.TotalPoint);
+                        pStmt.executeUpdate();
+                    } catch (Exception error) {
+                        JOptionPane.showMessageDialog(null, error);
+                    }
                     int click = JOptionPane.showConfirmDialog(null, "\t"
                             + "You Lose!!!!\n"
                             + "Do you wanna play again?", "Question", JOptionPane.YES_NO_OPTION);
@@ -174,7 +187,8 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             countBorder = 0;
             p2 = new Point(x, y);
             if (algorithm.checkTwoPoint(p1, p2) && !p1.equals(p2)) {
-                musicSuccess();
+//                musicSuccess();
+                Toolkit.getDefaultToolkit().beep();
                 btn[p2.x][p2.y].setBorder(new LineBorder(Color.red, 5));
                 total -= 2;
                 StaticFinalvariable.TotalPoint += 10;
@@ -254,14 +268,15 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                     url = "jdbc:mysql://" + ip.getHostAddress() + "/scorerank?useSSL=false";
                     connection = DriverManager
                             .getConnection(url, user, password);
-                    String sql = "INSERT INTO diem VALUES(?,?,?);";
+                    String sql = "INSERT INTO diem(ten,diem) VALUES(?,?);";
                     pStmt = connection.prepareStatement(sql);
-                    pStmt.setInt(1, stt);
-                    pStmt.setString(2, StaticFinalvariable.user.getUser());
-                    pStmt.setInt(3, StaticFinalvariable.TotalPoint);
+                    pStmt.setString(1, StaticFinalvariable.user.getUser());
+                    pStmt.setInt(2, StaticFinalvariable.TotalPoint);
+                    pStmt.executeUpdate();
                 } catch (Exception error) {
                     JOptionPane.showMessageDialog(null, error);
                 }
+                victory.setVisible(true);
                 int click = JOptionPane.showConfirmDialog(null, "\tYou Win\n"
                         + "Do you wanna play again?", "Question", JOptionPane.YES_NO_OPTION);
                 if (click == JOptionPane.YES_OPTION) {
@@ -345,6 +360,10 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     }
 
     public void MyLabel() {
+        victory.setSize(600, 400);
+        victory.setLocation(150, 150);
+        victory.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/phaohoa.gif")).getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
+        victory.setVisible(false);
         name.setText(StaticFinalvariable.user.getUser());
         avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.user.getLink())).getImage().getScaledInstance(80, 70, Image.SCALE_DEFAULT)));
         layout.setSize(850, 600);
@@ -352,7 +371,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         layoutpikachu.setSize(700, 400);
         diem.setLocation(600, -7);
         layouttroll.setVisible(false);
-        layouttroll.setSize(300, 300);
+        layouttroll.setSize(400, 400);
         layouttroll.setLocation(250, 150);
         layouttroll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/troll.jpg")));
     }
@@ -379,6 +398,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         level = new javax.swing.JLabel();
         avatar = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
+        victory = new javax.swing.JLabel();
         layout = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -464,6 +484,8 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         name.setFont(new java.awt.Font("MV Boli", 0, 20)); // NOI18N
         getContentPane().add(name);
         name.setBounds(10, 450, 60, 30);
+        getContentPane().add(victory);
+        victory.setBounds(360, 50, 0, 0);
 
         layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/Sleep-Pikachu-Pokemon-Wallpaper.png"))); // NOI18N
         getContentPane().add(layout);
@@ -476,7 +498,6 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         // TODO add your handling code here:
         scorerank sr = new scorerank();
         sr.setVisible(true);
-
     }//GEN-LAST:event_scoreActionPerformed
 
     private void newgameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newgameActionPerformed
@@ -625,6 +646,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JProgressBar progesstime;
     private javax.swing.JButton score;
     private javax.swing.JLabel time;
+    private javax.swing.JLabel victory;
     // End of variables declaration//GEN-END:variables
 
 }
