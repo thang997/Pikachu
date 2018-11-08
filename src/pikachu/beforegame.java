@@ -34,7 +34,6 @@ public class beforegame extends javax.swing.JFrame {
     private void initComponents() {
 
         batdau = new javax.swing.JButton();
-        tieptuc = new javax.swing.JButton();
         user = new javax.swing.JLabel();
         scoreall = new javax.swing.JButton();
         layout = new javax.swing.JLabel();
@@ -53,17 +52,12 @@ public class beforegame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(batdau);
-        batdau.setBounds(60, 30, 80, 30);
-
-        tieptuc.setBackground(new java.awt.Color(255, 153, 0));
-        tieptuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/resume.png"))); // NOI18N
-        getContentPane().add(tieptuc);
-        tieptuc.setBounds(60, 70, 80, 30);
+        batdau.setBounds(60, 70, 80, 30);
 
         user.setFont(new java.awt.Font("MV Boli", 0, 20)); // NOI18N
         user.setText("Welcome to pikachu");
         getContentPane().add(user);
-        user.setBounds(10, -10, 380, 40);
+        user.setBounds(10, 10, 380, 40);
 
         scoreall.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/score.png"))); // NOI18N
         scoreall.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +130,6 @@ public class beforegame extends javax.swing.JFrame {
     private javax.swing.JButton batdau;
     private javax.swing.JLabel layout;
     private javax.swing.JButton scoreall;
-    private javax.swing.JButton tieptuc;
     private javax.swing.JLabel user;
     // End of variables declaration//GEN-END:variables
 }

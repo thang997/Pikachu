@@ -220,7 +220,6 @@ public class FormRegis extends javax.swing.JFrame {
         // TODO add your handling code here:
         avatar a = new avatar();
         a.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_chooseActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed

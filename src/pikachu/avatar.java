@@ -151,8 +151,6 @@ private String link;
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
         StaticFinalvariable.user.setLink(link);
-        FormRegis fr = new FormRegis();
-        fr.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_saveActionPerformed
 
@@ -171,10 +169,7 @@ private String link;
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         // TODO add your handling code here:
-        FormRegis fr = new FormRegis();
         this.setVisible(false);
-        fr.setVisible(true);
-
     }//GEN-LAST:event_cancelActionPerformed
 
     private void anh3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anh3ActionPerformed
