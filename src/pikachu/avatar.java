@@ -29,6 +29,9 @@ private String link;
         anh2.setBorder(new LineBorder(Color.blue, 2));
         anh3.setBorder(new LineBorder(Color.red, 2));
         anh4.setBorder(new LineBorder(Color.GREEN, 2));
+        save.setBackground(Color.green);
+        cancel.setBackground(Color.red);
+//        cancel.setBackground(new Color(ERROR, rootPaneCheckingEnabled));
         setdata();
     }
 
@@ -152,18 +155,20 @@ private String link;
         // TODO add your handling code here:
         StaticFinalvariable.user.setLink(link);
         this.setVisible(false);
+        FormRegis fr = new FormRegis();
+        fr.setVisible(true);
     }//GEN-LAST:event_saveActionPerformed
 
     private void anh1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anh1ActionPerformed
         // TODO add your handling code here:
-        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[0])).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[0])).getImage().getScaledInstance(130, 120, Image.SCALE_DEFAULT)));
         link=StaticFinalvariable.image[0];
 
     }//GEN-LAST:event_anh1ActionPerformed
 
     private void anh2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anh2ActionPerformed
         // TODO add your handling code here:
-        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[1])).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[1])).getImage().getScaledInstance(130, 130, Image.SCALE_DEFAULT)));
         link=StaticFinalvariable.image[1];
     }//GEN-LAST:event_anh2ActionPerformed
 
@@ -174,7 +179,7 @@ private String link;
 
     private void anh3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anh3ActionPerformed
         // TODO add your handling code here:
-        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[2])).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[2])).getImage().getScaledInstance(130, 150, Image.SCALE_DEFAULT)));
         link=StaticFinalvariable.image[2];
     }//GEN-LAST:event_anh3ActionPerformed
 

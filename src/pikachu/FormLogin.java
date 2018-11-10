@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -34,9 +35,13 @@ public class FormLogin extends javax.swing.JFrame {
      */
     public FormLogin() {
         initComponents();
+        this.setSize(400, 300);
         setTitle("Form Login");
         setResizable(false);
         setLocationRelativeTo(null);
+//        register.setOpaque(false);
+//        layoutlogin.setSize(280,290);
+//jLabel3.setVisible(false);
         //login.setBackground(Color.red);
     }
 
@@ -46,7 +51,7 @@ public class FormLogin extends javax.swing.JFrame {
 
     private String MD5(String md5) {
         try {
-           
+
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
             byte[] array = md.digest(md5.getBytes());
             StringBuffer sb = new StringBuffer();
@@ -75,12 +80,21 @@ public class FormLogin extends javax.swing.JFrame {
         register = new javax.swing.JButton();
         passLogin = new javax.swing.JPasswordField();
         showpass = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        layoutlogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         jLabel1.setText("User");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(80, 100, 60, 14);
 
         jLabel2.setText("Password");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(80, 140, 60, 14);
+        getContentPane().add(userLogin);
+        userLogin.setBounds(150, 90, 134, 30);
 
         login.setText("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +102,8 @@ public class FormLogin extends javax.swing.JFrame {
                 loginActionPerformed(evt);
             }
         });
+        getContentPane().add(login);
+        login.setBounds(100, 200, 70, 23);
 
         register.setText("Register");
         register.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +111,10 @@ public class FormLogin extends javax.swing.JFrame {
                 registerActionPerformed(evt);
             }
         });
+        getContentPane().add(register);
+        register.setBounds(190, 200, 90, 23);
+        getContentPane().add(passLogin);
+        passLogin.setBounds(150, 130, 134, 30);
 
         showpass.setText("show");
         showpass.addActionListener(new java.awt.event.ActionListener() {
@@ -102,66 +122,35 @@ public class FormLogin extends javax.swing.JFrame {
                 showpassActionPerformed(evt);
             }
         });
+        getContentPane().add(showpass);
+        showpass.setBounds(290, 130, 70, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(userLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(passLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(showpass))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(login)
-                        .addGap(33, 33, 33)
-                        .addComponent(register)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {passLogin, userLogin});
-
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(passLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(showpass))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(login)
-                    .addComponent(register))
-                .addGap(50, 50, 50))
-        );
+        jLabel3.setFont(new java.awt.Font("MV Boli", 0, 30)); // NOI18N
+        jLabel3.setText("LOGIN");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(120, 10, 190, 50);
+        getContentPane().add(layoutlogin);
+        layoutlogin.setBounds(0, 0, 350, 290);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
+        // TODO add your handling code here:v
+        FormRegis fr = new FormRegis();
+        fr.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_registerActionPerformed
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // TODO add your handling code here:
         if (checkrong() == true) {
             JOptionPane.showMessageDialog(null, "Please enter user and password");
-           
+
         } else {
             try {
                 ip = InetAddress.getLocalHost();
-                url = "jdbc:mysql://"+ip.getHostAddress()+"/scorerank?useSSL=false";
+                url = "jdbc:mysql://" + ip.getHostAddress() + "/scorerank?useSSL=false";
                 connection = DriverManager
                         .getConnection(url, user, password);
                 String sql = "select * from login where username=? and password=?";
@@ -185,19 +174,11 @@ public class FormLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loginActionPerformed
 
-    private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
-        // TODO add your handling code here:v
-        FormRegis fr = new FormRegis();
-        fr.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_registerActionPerformed
-
     private void showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showpassActionPerformed
         // TODO add your handling code here:
-        if(showpass.isSelected()){
-            passLogin.setEchoChar((char)0);
-        }
-        else{
+        if (showpass.isSelected()) {
+            passLogin.setEchoChar((char) 0);
+        } else {
             passLogin.setEchoChar('*');
         }
     }//GEN-LAST:event_showpassActionPerformed
@@ -240,6 +221,8 @@ public class FormLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel layoutlogin;
     private javax.swing.JButton login;
     private javax.swing.JPasswordField passLogin;
     private javax.swing.JButton register;

@@ -6,6 +6,7 @@
 package pikachu;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Image;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -40,12 +41,18 @@ public class FormRegis extends javax.swing.JFrame {
      */
     public FormRegis() {
         initComponents();
+        setSize(400, 400);
         setTitle("Login");
         setResizable(false);
         setTitle("Form Register");
         setLocationRelativeTo(null);
+        back.setCursor(new Cursor(HAND_CURSOR));
+        regis.setCursor(new Cursor(HAND_CURSOR));
+        choose.setCursor(new Cursor(HAND_CURSOR));
+        layoutregis.setBackground(Color.white);
+        back.setBackground(new Color(ERROR, rootPaneCheckingEnabled));
         avatar.setBorder(new LineBorder(Color.yellow));
-        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.user.getLink())).getImage().getScaledInstance(80, 70, Image.SCALE_DEFAULT)));
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.user.getLink())).getImage().getScaledInstance(100, 80, Image.SCALE_DEFAULT)));
     }
 
     public boolean check() {
@@ -53,7 +60,28 @@ public class FormRegis extends javax.swing.JFrame {
     }
 
     public boolean check2() {
-        return passlogin.getText()==repass.getText().trim();
+        return passlogin.getText().equals(repass.getText().trim());
+    }
+
+    public boolean check3() {
+        try {
+            ip = InetAddress.getLocalHost();
+            url = "jdbc:mysql://" + ip.getHostAddress() + "/scorerank?useSSL=false";
+            connection = DriverManager
+                    .getConnection(url, user, password);
+            String sql = "select username from login where username = ?";
+            pStmt = connection.prepareStatement(sql);
+            pStmt.setString(1, userlogin.getText());
+            rs = pStmt.executeQuery();
+            if (!rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FormRegis.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(FormRegis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     private String MD5(String md5) {
@@ -93,16 +121,28 @@ public class FormRegis extends javax.swing.JFrame {
         avatar = new javax.swing.JLabel();
         showpass = new javax.swing.JCheckBox();
         showpass1 = new javax.swing.JCheckBox();
+        layoutregis = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         jLabel1.setText("Username");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(80, 53, 80, 14);
 
         jLabel2.setText("Password");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(80, 84, 80, 14);
 
         jLabel3.setText("Re-passwrord");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(80, 115, 80, 14);
 
         jLabel4.setText("Avatar");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(80, 190, 60, 14);
+        getContentPane().add(userlogin);
+        userlogin.setBounds(165, 50, 140, 30);
 
         choose.setText("Choose");
         choose.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +150,8 @@ public class FormRegis extends javax.swing.JFrame {
                 chooseActionPerformed(evt);
             }
         });
+        getContentPane().add(choose);
+        choose.setBounds(170, 240, 100, 23);
 
         regis.setText("Register");
         regis.addActionListener(new java.awt.event.ActionListener() {
@@ -117,13 +159,25 @@ public class FormRegis extends javax.swing.JFrame {
                 regisActionPerformed(evt);
             }
         });
+        getContentPane().add(regis);
+        regis.setBounds(90, 310, 80, 23);
 
+        back.setForeground(new java.awt.Color(255, 0, 0));
         back.setText("Back");
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.SE_RESIZE_CURSOR));
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
             }
         });
+        getContentPane().add(back);
+        back.setBounds(220, 310, 55, 23);
+        getContentPane().add(passlogin);
+        passlogin.setBounds(165, 81, 140, 30);
+        getContentPane().add(repass);
+        repass.setBounds(165, 112, 140, 30);
+        getContentPane().add(avatar);
+        avatar.setBounds(170, 150, 100, 80);
 
         showpass.setText("show");
         showpass.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +185,8 @@ public class FormRegis extends javax.swing.JFrame {
                 showpassActionPerformed(evt);
             }
         });
+        getContentPane().add(showpass);
+        showpass.setBounds(314, 80, 70, 23);
 
         showpass1.setText("show");
         showpass1.addActionListener(new java.awt.event.ActionListener() {
@@ -138,80 +194,10 @@ public class FormRegis extends javax.swing.JFrame {
                 showpass1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(choose)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(userlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(passlogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(showpass))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(repass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(showpass1))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(regis)
-                        .addGap(18, 18, 18)
-                        .addComponent(back)))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {passlogin, repass, userlogin});
-
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(userlogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passlogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(showpass))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(repass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(showpass1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(choose))
-                        .addGap(37, 37, 37))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(avatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(regis)
-                    .addComponent(back))
-                .addContainerGap(72, Short.MAX_VALUE))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {passlogin, repass, userlogin});
+        getContentPane().add(showpass1);
+        showpass1.setBounds(314, 111, 70, 23);
+        getContentPane().add(layoutregis);
+        layoutregis.setBounds(0, 0, 380, 340);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -220,6 +206,7 @@ public class FormRegis extends javax.swing.JFrame {
         // TODO add your handling code here:
         avatar a = new avatar();
         a.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_chooseActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -234,32 +221,40 @@ public class FormRegis extends javax.swing.JFrame {
         if (check() == true) {
             JOptionPane.showMessageDialog(null, "Enter all field please!!!!");
         } else {
-            if (check2() == true) {
+            if (check2() == false) {
                 JOptionPane.showMessageDialog(null, "re-password is not match");
             } else {
-                try {
-                    ip = InetAddress.getLocalHost();
-                    url = "jdbc:mysql://" + ip.getHostAddress() + "/scorerank?useSSL=false";
-                    connection = DriverManager
-                            .getConnection(url, user, password);
-                    String sql = "INSERT INTO login(username, password , linkanh) VALUES(?,?,?);";
-                    pStmt = connection.prepareStatement(sql);
-                    pStmt.setString(1, userlogin.getText());
-                    pStmt.setString(2, MD5(passlogin.getText()));
-                    pStmt.setString(3, StaticFinalvariable.user.getLink());
-                    int result = pStmt.executeUpdate();
-                    if (result > 0) {
-                        JOptionPane.showMessageDialog(null, "Success");
-                        FormLogin fl = new FormLogin();
-                        fl.setVisible(true);
-                        this.setVisible(false);
+                if (passlogin.getText().length() < 8) {
+                    JOptionPane.showMessageDialog(null, "your password is too short");
+                } else {
+                    if (check3() == true) {
+                        try {
+                            ip = InetAddress.getLocalHost();
+                            url = "jdbc:mysql://" + ip.getHostAddress() + "/scorerank?useSSL=false";
+                            connection = DriverManager
+                                    .getConnection(url, user, password);
+                            String sql = "INSERT INTO login(username, password , linkanh) VALUES(?,?,?);";
+                            pStmt = connection.prepareStatement(sql);
+                            pStmt.setString(1, userlogin.getText());
+                            pStmt.setString(2, MD5(passlogin.getText()));
+                            pStmt.setString(3, StaticFinalvariable.user.getLink());
+                            int result = pStmt.executeUpdate();
+                            if (result > 0) {
+                                JOptionPane.showMessageDialog(null, "Success");
+                                FormLogin fl = new FormLogin();
+                                fl.setVisible(true);
+                                this.setVisible(false);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Something wrong!!!");
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(FormRegis.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (UnknownHostException ex) {
+                            Logger.getLogger(FormRegis.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "username is exist");
                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(FormRegis.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (UnknownHostException ex) {
-                    Logger.getLogger(FormRegis.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -287,37 +282,37 @@ public class FormRegis extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(FormRegis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(FormRegis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(FormRegis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(FormRegis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new FormRegis().setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FormRegis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FormRegis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FormRegis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FormRegis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FormRegis().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel avatar;
@@ -327,6 +322,7 @@ public class FormRegis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel layoutregis;
     private javax.swing.JPasswordField passlogin;
     private javax.swing.JButton regis;
     private javax.swing.JPasswordField repass;

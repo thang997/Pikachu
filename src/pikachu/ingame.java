@@ -366,7 +366,12 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         victory.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/phaohoa.gif")).getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
         victory.setVisible(false);
         name.setText(StaticFinalvariable.user.getUser());
-        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.user.getLink())).getImage().getScaledInstance(80, 70, Image.SCALE_DEFAULT)));
+        name.setLocation(30, 150);
+        name.setText("admin");
+        level.setLocation(600,45);
+        avatar.setSize(100,100);
+        avatar.setLocation(20, 50);   
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.user.getLink())).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
         layout.setSize(850, 600);
         layoutpikachu.setBackground(null);
         layoutpikachu.setSize(700, 400);
@@ -432,7 +437,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(newgame);
-        newgame.setBounds(10, 150, 80, 30);
+        newgame.setBounds(10, 220, 80, 30);
 
         pause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/pause.png"))); // NOI18N
         pause.addActionListener(new java.awt.event.ActionListener() {
@@ -441,7 +446,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(pause);
-        pause.setBounds(10, 190, 80, 30);
+        pause.setBounds(10, 260, 80, 30);
 
         time.setFont(new java.awt.Font("MV Boli", 0, 40)); // NOI18N
         time.setText("Time");
@@ -455,7 +460,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(score);
-        score.setBounds(10, 230, 80, 30);
+        score.setBounds(10, 300, 80, 30);
 
         diem.setFont(new java.awt.Font("MV Boli", 0, 40)); // NOI18N
         diem.setText("Score:0");
@@ -474,14 +479,14 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(hint);
-        hint.setBounds(10, 320, 80, 30);
+        hint.setBounds(10, 340, 80, 30);
         getContentPane().add(progesstime);
         progesstime.setBounds(130, 10, 450, 30);
 
         counthint.setFont(new java.awt.Font("MV Boli", 0, 20)); // NOI18N
         counthint.setText("3");
         getContentPane().add(counthint);
-        counthint.setBounds(40, 340, 60, 40);
+        counthint.setBounds(40, 370, 60, 40);
         getContentPane().add(layouttroll);
         layouttroll.setBounds(50, 320, 90, 110);
 
@@ -625,38 +630,38 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ingame().setVisible(true);
-
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ingame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ingame().setVisible(true);
+//
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel avatar;
