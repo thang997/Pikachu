@@ -140,10 +140,6 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        StaticFinalvariable.p1 = null;
-        StaticFinalvariable.p2 = null;
-        StaticFinalvariable.p3 = null;
-        StaticFinalvariable.p4 = null;
         String btnIndex = e.getActionCommand();
         int indexDot = btnIndex.lastIndexOf(",");
         int x = Integer.parseInt(btnIndex.substring(0, indexDot));
@@ -200,15 +196,16 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                             drawLine = new DrawLine(point1, point2, point3, point4);
                         }
 
-                        drawLine.setSize(700, 400);
-                        drawLine.setBounds(130, 80, 830, 480);
+                        drawLine.setSize(800, 500);
+                        drawLine.setBounds(130, 50, 930, 580);
                         drawLine.setOpaque(false);
                         pane.add(drawLine, new Integer(2));
 
                         try {
-                            Thread.sleep(500);
+                            Thread.sleep(300);
                             drawLine.setVisible(false);
                             pane.remove(drawLine);
+
                         } catch (InterruptedException ex) {
                             Logger.getLogger(ingame.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -275,7 +272,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             StaticFinalvariable.Level++;
             if (StaticFinalvariable.Level <= 3) {
                 level.setText("Level:" + StaticFinalvariable.Level);
-                layout.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/"+StaticFinalvariable.Level+".jpg")).getImage().getScaledInstance(1000, 600, Image.SCALE_DEFAULT)));
+                layout.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/" + StaticFinalvariable.Level + ".jpg")).getImage().getScaledInstance(1000, 600, Image.SCALE_DEFAULT)));
                 total = 144;
                 count = 100;
                 progesstime.setValue((int) count);
@@ -339,6 +336,10 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                 }
             }
         }
+        StaticFinalvariable.p1 = null;
+        StaticFinalvariable.p2 = null;
+        StaticFinalvariable.p3 = null;
+        StaticFinalvariable.p4 = null;
     }
 
     private void musicSuccess() {
@@ -389,15 +390,15 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
 
     public void MyLabel() {
         pane = getLayeredPane();
-        time.setLocation(180,0);
-        progesstime.setLocation(280,10);
+        time.setLocation(180, 0);
+        progesstime.setLocation(280, 10);
         victory.setSize(600, 400);
         victory.setLocation(150, 150);
         victory.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/phaohoa.gif")).getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
         victory.setVisible(false);
         name.setText(StaticFinalvariable.user.getUser());
         name.setLocation(30, 150);
-        level.setLocation(800, 45);
+        level.setLocation(750, 45);
         avatar.setSize(100, 100);
         avatar.setLocation(20, 50);
         avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.user.getLink())).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
@@ -405,7 +406,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         layout.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/Sleep-Pikachu-Pokemon-Wallpaper.png")).getImage().getScaledInstance(1000, 600, Image.SCALE_DEFAULT)));
         layoutpikachu.setBackground(null);
         layoutpikachu.setSize(800, 500);
-        diem.setLocation(800, -7);
+        diem.setLocation(750, -7);
         layouttroll.setVisible(false);
         layouttroll.setSize(400, 400);
         layouttroll.setLocation(250, 150);

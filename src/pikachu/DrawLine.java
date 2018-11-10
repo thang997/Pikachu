@@ -29,7 +29,7 @@ public class DrawLine extends JPanel {
         this.p1 = p1;
         this.p2 = p2;
         number=2;
-        setPreferredSize(new Dimension(700, 400));
+        setPreferredSize(new Dimension(800, 500));
     }
 
     public DrawLine(Point p1, Point p2, Point p3) {
@@ -37,7 +37,7 @@ public class DrawLine extends JPanel {
         this.p2 = p2;
         this.p3 = p3;
         number=3;
-        setPreferredSize(new Dimension(700, 400));
+        setPreferredSize(new Dimension(800, 500));
     }
     
     
@@ -48,7 +48,7 @@ public class DrawLine extends JPanel {
         this.p3 = p3;
         this.p4 = p4;
         number=4;
-        setPreferredSize(new Dimension(700, 400));
+        setPreferredSize(new Dimension(800, 500));
 
     }
     public void paint(Graphics g) {
