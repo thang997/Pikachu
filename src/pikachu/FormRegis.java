@@ -49,8 +49,6 @@ public class FormRegis extends javax.swing.JFrame {
         back.setCursor(new Cursor(HAND_CURSOR));
         regis.setCursor(new Cursor(HAND_CURSOR));
         choose.setCursor(new Cursor(HAND_CURSOR));
-        layoutregis.setBackground(Color.white);
-        back.setBackground(new Color(ERROR, rootPaneCheckingEnabled));
         avatar.setBorder(new LineBorder(Color.yellow));
         avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.user.getLink())).getImage().getScaledInstance(100, 80, Image.SCALE_DEFAULT)));
     }
@@ -160,9 +158,8 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(regis);
-        regis.setBounds(90, 310, 80, 23);
+        regis.setBounds(110, 310, 80, 23);
 
-        back.setForeground(new java.awt.Color(255, 0, 0));
         back.setText("Back");
         back.setCursor(new java.awt.Cursor(java.awt.Cursor.SE_RESIZE_CURSOR));
         back.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +168,7 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(back);
-        back.setBounds(220, 310, 55, 23);
+        back.setBounds(250, 310, 55, 23);
         getContentPane().add(passlogin);
         passlogin.setBounds(165, 81, 140, 30);
         getContentPane().add(repass);

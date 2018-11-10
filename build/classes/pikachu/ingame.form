@@ -31,7 +31,7 @@
     <Container class="javax.swing.JPanel" name="layoutpikachu">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="130" y="80" width="410" height="340"/>
+          <AbsoluteConstraints x="130" y="50" width="410" height="340"/>
         </Constraint>
       </Constraints>
 

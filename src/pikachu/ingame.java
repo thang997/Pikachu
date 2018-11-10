@@ -59,13 +59,13 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
      */
     public ingame() {
         initComponents();
-        setSize(850, 600);
+        setSize(1000, 600);
         setResizable(false);
         setTitle("Pikachu Game");
         setLocationRelativeTo(null);
         MyGridLayout();
         MyLabel();
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -275,7 +275,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             StaticFinalvariable.Level++;
             if (StaticFinalvariable.Level <= 3) {
                 level.setText("Level:" + StaticFinalvariable.Level);
-                layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/" + StaticFinalvariable.Level + ".jpg")));
+                layout.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/"+StaticFinalvariable.Level+".jpg")).getImage().getScaledInstance(1000, 600, Image.SCALE_DEFAULT)));
                 total = 144;
                 count = 100;
                 progesstime.setValue((int) count);
@@ -389,21 +389,23 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
 
     public void MyLabel() {
         pane = getLayeredPane();
+        time.setLocation(180,0);
+        progesstime.setLocation(280,10);
         victory.setSize(600, 400);
         victory.setLocation(150, 150);
         victory.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/phaohoa.gif")).getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
         victory.setVisible(false);
         name.setText(StaticFinalvariable.user.getUser());
         name.setLocation(30, 150);
-        name.setText("admin");
-        level.setLocation(600, 45);
+        level.setLocation(800, 45);
         avatar.setSize(100, 100);
         avatar.setLocation(20, 50);
         avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.user.getLink())).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
-        layout.setSize(850, 600);
+        layout.setSize(1000, 600);
+        layout.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/Sleep-Pikachu-Pokemon-Wallpaper.png")).getImage().getScaledInstance(1000, 600, Image.SCALE_DEFAULT)));
         layoutpikachu.setBackground(null);
-        layoutpikachu.setSize(700, 400);
-        diem.setLocation(600, -7);
+        layoutpikachu.setSize(800, 500);
+        diem.setLocation(800, -7);
         layouttroll.setVisible(false);
         layouttroll.setSize(400, 400);
         layouttroll.setLocation(250, 150);
@@ -456,7 +458,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         );
 
         getContentPane().add(layoutpikachu);
-        layoutpikachu.setBounds(130, 80, 410, 340);
+        layoutpikachu.setBounds(130, 50, 410, 340);
 
         newgame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/new.png"))); // NOI18N
         newgame.setBorder(null);

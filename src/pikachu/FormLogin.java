@@ -128,7 +128,7 @@ public class FormLogin extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("MV Boli", 0, 30)); // NOI18N
         jLabel3.setText("LOGIN");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(120, 10, 190, 50);
+        jLabel3.setBounds(150, 10, 190, 50);
         getContentPane().add(layoutlogin);
         layoutlogin.setBounds(0, 0, 350, 290);
 
