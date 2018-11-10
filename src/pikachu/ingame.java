@@ -34,11 +34,13 @@ import javax.swing.border.LineBorder;
  */
 public class ingame extends javax.swing.JFrame implements ActionListener {
 
+    private JLayeredPane pane;
+    private DrawLine drawLine;
     private Algorithm algorithm;
     private JButton[][] btn;
     private static int total = 144;
-    Point p1 = null;
-    Point p2 = null;
+    private Point p1 = null;
+    private Point p2 = null;
     private boolean blnPause;
     private int count = 100;
     private Timer t;
@@ -55,7 +57,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     /*
      * Creates new form ingame
      */
-    public ingame() {     
+    public ingame() {
         initComponents();
         setSize(850, 600);
         setResizable(false);
@@ -64,7 +66,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         MyGridLayout();
         MyLabel();
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        
+
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
@@ -114,23 +116,34 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         algorithm = new Algorithm();
         Change();
         btn = new JButton[13][20];
-        grid = new GridLayout(9, 16, 2, 2);
+
+        grid = new GridLayout(11, 18, 2, 2);
         layoutpikachu.setLayout(grid);
-        for (int i = 2; i < 11; i++) {
-            for (int j = 2; j < 18; j++) {
-                int a = algorithm.level1.getValue(i, j);
+        for (int i = 1; i < 12; i++) {
+            for (int j = 1; j < 19; j++) {
                 btn[i][j] = new JButton();
-                btn[i][j].setActionCommand(i + "," + j);
-                btn[i][j].addActionListener(this);
-                btn[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/imgpikachu/" + a + ".jpg")));
+                if (i == 1 || i == 11 || j == 1 || j == 18) {
+                    btn[i][j].setVisible(false);
+                } else {
+                    int a = algorithm.level1.getValue(i, j);
+                    btn[i][j].setActionCommand(i + "," + j);
+                    btn[i][j].addActionListener(this);
+                    btn[i][j].setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/imgpikachu/" + a + ".jpg")));
+                }
+
                 layoutpikachu.add(btn[i][j]);
             }
         }
+
         layoutpikachu.setOpaque(false);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        StaticFinalvariable.p1 = null;
+        StaticFinalvariable.p2 = null;
+        StaticFinalvariable.p3 = null;
+        StaticFinalvariable.p4 = null;
         String btnIndex = e.getActionCommand();
         int indexDot = btnIndex.lastIndexOf(",");
         int x = Integer.parseInt(btnIndex.substring(0, indexDot));
@@ -163,7 +176,46 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             countBorder = 0;
             p2 = new Point(x, y);
             if (algorithm.checkTwoPoint(p1, p2) && !p1.equals(p2)) {
-//                musicSuccess();
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Point point1 = null;
+                        Point point2 = null;
+                        Point point3 = null;
+                        Point point4 = null;
+
+                        point1 = btn[StaticFinalvariable.p1.x][StaticFinalvariable.p1.y].getLocation();
+                        point2 = btn[StaticFinalvariable.p2.x][StaticFinalvariable.p2.y].getLocation();
+                        if (StaticFinalvariable.p3 != null) {
+                            point3 = btn[StaticFinalvariable.p3.x][StaticFinalvariable.p3.y].getLocation();
+                        }
+                        if (StaticFinalvariable.p4 != null) {
+                            point4 = btn[StaticFinalvariable.p4.x][StaticFinalvariable.p4.y].getLocation();
+                        }
+                        if (point3 == null && point4 == null) {
+                            drawLine = new DrawLine(point1, point2);
+                        } else if (point4 == null) {
+                            drawLine = new DrawLine(point1, point2, point3);
+                        } else {
+                            drawLine = new DrawLine(point1, point2, point3, point4);
+                        }
+
+                        drawLine.setSize(700, 400);
+                        drawLine.setBounds(130, 80, 830, 480);
+                        drawLine.setOpaque(false);
+                        pane.add(drawLine, new Integer(2));
+
+                        try {
+                            Thread.sleep(500);
+                            drawLine.setVisible(false);
+                            pane.remove(drawLine);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(ingame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+                });
+                thread.start();
                 Toolkit.getDefaultToolkit().beep();
                 btn[p2.x][p2.y].setBorder(new LineBorder(Color.red, 5));
                 total -= 2;
@@ -336,6 +388,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     }
 
     public void MyLabel() {
+        pane = getLayeredPane();
         victory.setSize(600, 400);
         victory.setLocation(150, 150);
         victory.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/phaohoa.gif")).getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
@@ -343,9 +396,9 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         name.setText(StaticFinalvariable.user.getUser());
         name.setLocation(30, 150);
         name.setText("admin");
-        level.setLocation(600,45);
-        avatar.setSize(100,100);
-        avatar.setLocation(20, 50);   
+        level.setLocation(600, 45);
+        avatar.setSize(100, 100);
+        avatar.setLocation(20, 50);
         avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.user.getLink())).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
         layout.setSize(850, 600);
         layoutpikachu.setBackground(null);
@@ -355,6 +408,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         layouttroll.setSize(400, 400);
         layouttroll.setLocation(250, 150);
         layouttroll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/troll.jpg")));
+        pane.add(layoutpikachu, new Integer(1));
     }
 
     /**
@@ -587,20 +641,20 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_hintActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-         
-       int click= JOptionPane.showConfirmDialog(this, "Do you wanna exit game?","Question",JOptionPane.YES_NO_OPTION);
-       if(click == JOptionPane.YES_OPTION){
-           this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
 
-       }
-       if(click==JOptionPane.NO_OPTION){
-           
-       }
+        int click = JOptionPane.showConfirmDialog(this, "Do you wanna exit game?", "Question", JOptionPane.YES_NO_OPTION);
+        if (click == JOptionPane.YES_OPTION) {
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        }
+        if (click == JOptionPane.NO_OPTION) {
+
+        }
     }//GEN-LAST:event_formWindowClosing
 
     private void hintMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hintMouseClicked
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_hintMouseClicked
 
 

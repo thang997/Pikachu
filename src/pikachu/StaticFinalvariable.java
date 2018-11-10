@@ -5,6 +5,7 @@
  */
 package pikachu;
 
+import java.awt.Point;
 /**
  *
  * @author Hp Pavilion
@@ -15,4 +16,8 @@ public class StaticFinalvariable {
     public static int Level = 1; 
     public static User user = new User(null,null,"/pikachu/image/11.jpg");
     public static String image[]={"/pikachu/image/11.jpg","/pikachu/image/12.jpg","/pikachu/image/13.jpg","/pikachu/image/14.jpg","/pikachu/image/15.jpg"};
+    public static Point p1=null;
+    public static Point p2=null;
+    public static Point p3=null;
+    public static Point p4=null;
 }

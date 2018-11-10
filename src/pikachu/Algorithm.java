@@ -8,6 +8,7 @@ package pikachu;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
+import pikachu.ingame;
 
 /**
  *
@@ -18,43 +19,21 @@ public class Algorithm {
     public Level level1 = new Level();
 
     public Algorithm() {
-       
-    }
-
-    //p1 and p2 nam tren cung 1 hang hoac cot dau tien hoac cuoi cung
-    //(1)
-    private boolean checkLineXFirst(int x, int y1, int y2) {
-
-        return true;
-    }
-
-    //(2)
-    private boolean checkLineXLast(int x, int y1, int y2) {
-
-        return true;
-    }
-
-    //(3)
-    private boolean checkLineYFirst(int x1, int x2, int y) {
-        return true;
-    }
-
-    //(4)
-    private boolean checkLineYLast(int x1, int x2, int y) {
-
-        return true;
     }
 
     //check with line x, y1 next y2
     //(5)
     private boolean checkNextX(int x, int y1, int y2) {
-
+        StaticFinalvariable.p1 = new Point(x, y1);
+        StaticFinalvariable.p2 = new Point(x, y2);
         return true;
     }
 
     //check with line x, y1 next y2
     //(6)
     private boolean checkNextY(int x1, int x2, int y) {
+        StaticFinalvariable.p1 = new Point(x1, y);
+        StaticFinalvariable.p2 = new Point(x2, y);
         return true;
     }
 
@@ -65,17 +44,17 @@ public class Algorithm {
         int min = Math.min(y1, y2);
         int max = Math.max(y1, y2);
         // run column
-        if (max - min == 1 && level1.getValue(x,min)!=0 && level1.getValue(x,max)!=0) {
+        if (max - min == 1 && level1.getValue(x, min) != 0 && level1.getValue(x, max) != 0) {
             return false;
         }
-       
+
         for (int y = min + 1; y < max; y++) {
-            if (level1.getValue(x, y) != 0) { // if see barrier then die
+            if (level1.getValue(x, y) != 0) {
                 return false;
             }
         }
-
-        // not die -> success
+        StaticFinalvariable.p1 = new Point(x, y1);
+        StaticFinalvariable.p2 = new Point(x, y2);
         return true;
     }
 
@@ -84,16 +63,17 @@ public class Algorithm {
     private boolean checkLineY(int x1, int x2, int y) {
         int min = Math.min(x1, x2);
         int max = Math.max(x1, x2);
-        if (max - min == 1 && level1.getValue(min, y) != 0 && level1.getValue(max, y)!=0) {
+        if (max - min == 1 && level1.getValue(min, y) != 0 && level1.getValue(max, y) != 0) {
             return false;
         }
-       
+
         for (int x = min + 1; x < max; x++) {
             if (level1.getValue(x, y) != 0) {
                 return false;
             }
         }
-
+        StaticFinalvariable.p1 = new Point(x1, y);
+        StaticFinalvariable.p2 = new Point(x2, y);
         return true;
     }
 
@@ -102,30 +82,62 @@ public class Algorithm {
     private boolean checkNextLineXY(Point p1, Point p2) {
         if (p1.x < p2.x) {
             if (p1.y < p2.y) {
-                if (level1.getValue(p1.x + 1, p1.y) != 0 && level1.getValue(p1.x, p1.y + 1) != 0) {
-                    return false;
-                } else {
+                if (level1.getValue(p1.x + 1, p1.y) == 0) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x + 1, p1.y);
+                    StaticFinalvariable.p3 = p2;
                     return true;
+                } else if (level1.getValue(p1.x, p1.y + 1) == 0) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x, p1.y + 1);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else {
+                    return false;
                 }
             } else {
-                if (level1.getValue(p1.x + 1, p1.y) != 0 && level1.getValue(p1.x, p1.y - 1) != 0) {
-                    return false;
-                } else {
+                if (level1.getValue(p1.x + 1, p1.y) == 0) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x + 1, p1.y);
+                    StaticFinalvariable.p3 = p2;
                     return true;
+                } else if (level1.getValue(p1.x, p1.y - 1) == 0) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x, p1.y - 1);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else {
+                    return false;
                 }
             }
         } else {
             if (p1.y < p2.y) {
-                if (level1.getValue(p2.x + 1, p2.y) != 0 && level1.getValue(p2.x, p2.y - 1) != 0) {
-                    return false;
-                } else {
+                if (level1.getValue(p2.x + 1, p2.y) == 0) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x + 1, p2.y);
+                    StaticFinalvariable.p3 = p2;
                     return true;
+                } else if (level1.getValue(p2.x, p2.y - 1) == 0) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x, p2.y - 1);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else {
+                    return false;
                 }
             } else {
-                if (level1.getValue(p2.x + 1, p2.y) != 0 && level1.getValue(p2.x, p2.y + 1) != 0) {
-                    return false;
-                } else {
+                if (level1.getValue(p2.x + 1, p2.y) == 0) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x + 1, p2.y);
+                    StaticFinalvariable.p3 = p2;
                     return true;
+                } else if (level1.getValue(p2.x, p2.y + 1) == 0) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x, p2.y + 1);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else {
+                    return false;
                 }
             }
         }
@@ -135,13 +147,29 @@ public class Algorithm {
     private boolean checkNextLineX(Point p1, Point p2) {
         if (p1.x < p2.x) {
             if (p1.y < p2.y) {
-                if (checkLineX(p1.x, p1.y, p2.y+1) == true || checkLineX(p1.x + 1, p1.y-1, p2.y) == true) {
+                if (checkLineX(p1.x, p1.y, p2.y + 1) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x, p2.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else if (checkLineX(p1.x + 1, p1.y - 1, p2.y) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x + 1, p1.y);
+                    StaticFinalvariable.p3 = p2;
                     return true;
                 } else {
                     return false;
                 }
             } else {
-                if (checkLineX(p1.x, p1.y, p2.y-1) == true || checkLineX(p1.x + 1, p1.y+1, p2.y) == true) {
+                if (checkLineX(p1.x, p1.y, p2.y - 1) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x, p2.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else if (checkLineX(p1.x + 1, p1.y + 1, p2.y) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x, p1.y);
+                    StaticFinalvariable.p3 = p2;
                     return true;
                 } else {
                     return false;
@@ -150,13 +178,29 @@ public class Algorithm {
 
         } else {
             if (p1.y < p2.y) {
-                if (checkLineX(p1.x, p1.y, p2.y+1) == true || checkLineX(p1.x - 1, p1.y-1, p2.y) == true) {
+                if (checkLineX(p1.x, p1.y, p2.y + 1) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x, p2.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else if (checkLineX(p1.x - 1, p1.y - 1, p2.y) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x, p1.y);
+                    StaticFinalvariable.p3 = p2;
                     return true;
                 } else {
                     return false;
                 }
             } else {
-                if (checkLineX(p1.x, p1.y, p2.y-1) == true || checkLineX(p1.x - 1, p1.y+1, p2.y) == true) {
+                if (checkLineX(p1.x, p1.y, p2.y - 1) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x, p2.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else if (checkLineX(p1.x - 1, p1.y + 1, p2.y) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x, p1.y);
+                    StaticFinalvariable.p3 = p2;
                     return true;
                 } else {
                     return false;
@@ -170,13 +214,29 @@ public class Algorithm {
     private boolean checkNextLineY(Point p1, Point p2) {
         if (p1.y < p2.y) {
             if (p1.x < p2.x) {
-                if (checkLineY(p1.x, p2.x+1, p1.y) == true || checkLineY(p1.x - 1, p2.x, p1.y + 1) == true) {
+                if (checkLineY(p1.x, p2.x + 1, p1.y) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x, p1.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else if (checkLineY(p1.x - 1, p2.x, p1.y + 1) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x, p2.y);
+                    StaticFinalvariable.p3 = p2;
                     return true;
                 } else {
                     return false;
                 }
             } else {
-                if (checkLineY(p1.x, p2.x-1, p1.y) == true || checkLineY(p1.x + 1, p2.x, p1.y + 1) == true) {
+                if (checkLineY(p1.x, p2.x - 1, p1.y) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x, p2.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else if (checkLineY(p1.x + 1, p2.x, p1.y + 1) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x, p1.y);
+                    StaticFinalvariable.p3 = p2;
                     return true;
                 } else {
                     return false;
@@ -185,13 +245,29 @@ public class Algorithm {
 
         } else {
             if (p1.x < p2.x) {
-                if (checkLineY(p1.x, p2.x+1, p1.y) == true || checkLineY(p1.x - 1, p2.x, p1.y - 1) == true) {
+                if (checkLineY(p1.x, p2.x + 1, p1.y) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x, p1.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else if (checkLineY(p1.x - 1, p2.x, p1.y - 1) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x, p2.y);
+                    StaticFinalvariable.p3 = p2;
                     return true;
                 } else {
                     return false;
                 }
             } else {
-                if (checkLineY(p1.x, p2.x-1, p1.y) == true || checkLineY(p1.x +1, p2.x, p1.y - 1) == true) {
+                if (checkLineY(p1.x, p2.x - 1, p1.y) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x, p1.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else if (checkLineY(p1.x + 1, p2.x, p1.y - 1) == true) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x, p2.y);
+                    StaticFinalvariable.p3 = p2;
                     return true;
                 } else {
                     return false;
@@ -201,14 +277,71 @@ public class Algorithm {
         }
     }
 
+    //13
     //2 o cach xa dong,xa cot nhung 2 can 2 duong de an
     private boolean checkTowLine(Point p1, Point p2) {
-        if ((checkLineX(p1.x, p1.y, p2.y) && checkLineY(p1.x, p2.x, p2.y))
-                || (checkLineX(p2.x, p2.y, p1.y) && checkLineY(p1.x, p2.x, p1.y))) {
-            return true;
+        if (p1.x < p2.x) {
+            if (p1.y < p2.y) {
+                if (checkLineX(p1.x, p1.y, p2.y + 1) && checkLineY(p1.x - 1, p2.x, p2.y)) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x, p2.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else if (checkLineX(p2.x, p1.y - 1, p2.y) && checkLineY(p1.x, p2.x + 1, p1.y)) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x, p1.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                if (checkLineX(p1.x, p1.y, p2.y - 1) && checkLineY(p1.x - 1, p2.x, p2.y)) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x, p2.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else if (checkLineX(p2.x, p1.y + 1, p2.y) && checkLineY(p1.x, p2.x + 1, p1.y)) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x, p1.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         } else {
-            return false;
+            if (p1.y < p2.y) {
+                if (checkLineX(p1.x, p1.y, p2.y + 1) && checkLineY(p1.x + 1, p2.x, p2.y)) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x, p2.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else if (checkLineX(p2.x, p1.y - 1, p2.y) && checkLineY(p1.x, p2.x - 1, p1.y)) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x, p1.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                if (checkLineX(p1.x, p1.y, p2.y - 1) && checkLineY(p1.x + 1, p2.x, p2.y)) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p1.x, p2.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else if (checkLineX(p2.x, p1.y + 1, p2.y) && checkLineY(p1.x, p2.x - 1, p1.y)) {
+                    StaticFinalvariable.p1 = p1;
+                    StaticFinalvariable.p2 = new Point(p2.x, p1.y);
+                    StaticFinalvariable.p3 = p2;
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
+
     }
 
     //check 3 line
@@ -223,9 +356,13 @@ public class Algorithm {
         }
         for (int y = pMinY.y + 1; y < pMaxY.y; y++) {
             // check three line
-            if (checkLineX(pMinY.x, pMinY.y, y+1)
-                    && checkLineY(pMinY.x-1, pMaxY.x+1, y)
-                    && checkLineX(pMaxY.x, y-1, pMaxY.y)) {
+            if (checkLineX(pMinY.x, pMinY.y, y + 1)
+                    && checkLineY(pMinY.x - 1, pMaxY.x + 1, y)
+                    && checkLineX(pMaxY.x, y - 1, pMaxY.y)) {
+                StaticFinalvariable.p1 = pMinY;
+                StaticFinalvariable.p2 = new Point(pMinY.x, y);
+                StaticFinalvariable.p3 = new Point(pMaxY.x, y);
+                StaticFinalvariable.p4 = pMaxY;
                 return true;
             }
         }
@@ -243,12 +380,13 @@ public class Algorithm {
         }
         // find line and y begin
         for (int x = pMinX.x + 1; x < pMaxX.x; x++) {
-            if (checkLineY(pMinX.x, x+1, pMinX.y)
-                    && checkLineX(x, pMinX.y-1, pMaxX.y+1)
-                    && checkLineY(x-1, pMaxX.x, pMaxX.y)) {
-                System.out.println("(" + pMinX.x + "," + pMinX.y + ") -> (" + x
-                        + "," + pMinX.y + ") -> (" + x + "," + pMaxX.y
-                        + ") -> (" + pMaxX.x + "," + pMaxX.y + ")");
+            if (checkLineY(pMinX.x, x + 1, pMinX.y)
+                    && checkLineX(x, pMinX.y - 1, pMaxX.y + 1)
+                    && checkLineY(x - 1, pMaxX.x, pMaxX.y)) {
+                StaticFinalvariable.p1 = pMinX;
+                StaticFinalvariable.p2 = new Point(x, pMinX.y);
+                StaticFinalvariable.p3 = new Point(x, pMaxX.y);
+                StaticFinalvariable.p4 = pMaxX;
                 return true;
             }
         }
@@ -271,6 +409,10 @@ public class Algorithm {
             while (level1.getValue(pMinY.x, y + 1) == 0
                     && level1.getValue(pMaxY.x, y + 1) == 0) {
                 if (checkLineY(pMinY.x, pMaxY.x, y + 1)) {
+                    StaticFinalvariable.p1 = pMinY;
+                    StaticFinalvariable.p2 = new Point(pMinY.x, y + 1);
+                    StaticFinalvariable.p3 = new Point(pMaxY.x, y + 1);
+                    StaticFinalvariable.p4 = pMaxY;
                     return true;
                 }
                 y += 1;
@@ -295,6 +437,10 @@ public class Algorithm {
             while (level1.getValue(pMinY.x, y - 1) == 0
                     && level1.getValue(pMaxY.x, y - 1) == 0) {
                 if (checkLineY(pMinY.x, pMaxY.x, y - 1)) {
+                    StaticFinalvariable.p1 = pMinY;
+                    StaticFinalvariable.p2 = new Point(pMinY.x, y - 1);
+                    StaticFinalvariable.p3 = new Point(pMaxY.x, y - 1);
+                    StaticFinalvariable.p4 = pMaxY;
                     return true;
                 }
                 y -= 1;
@@ -317,6 +463,10 @@ public class Algorithm {
             while (level1.getValue(row + 1, pMinX.y) == 0
                     && level1.getValue(row + 1, pMaxX.y) == 0) {
                 if (checkLineX(row + 1, pMinX.y, pMaxX.y)) {
+                    StaticFinalvariable.p1 = pMinX;
+                    StaticFinalvariable.p2 = new Point(row + 1, pMinX.y);
+                    StaticFinalvariable.p3 = new Point(row + 1, pMaxX.y);
+                    StaticFinalvariable.p4 = pMaxX;
                     return true;
                 }
                 row += 1;
@@ -338,6 +488,10 @@ public class Algorithm {
             while (level1.getValue(x - 1, pMinX.y) == 0
                     && level1.getValue(x - 1, pMaxX.y) == 0) {
                 if (checkLineX(x - 1, pMinX.y, pMaxX.y)) {
+                    StaticFinalvariable.p1 = pMinX;
+                    StaticFinalvariable.p2 = new Point(x - 1, pMinX.y);
+                    StaticFinalvariable.p3 = new Point(x - 1, pMaxX.y);
+                    StaticFinalvariable.p4 = pMaxX;
                     return true;
                 }
                 x -= 1;
@@ -346,81 +500,9 @@ public class Algorithm {
         return false;
     }
 
-    //(20)
-    private boolean checkStraightLineX(Point p1, Point p2) {
-        if (p1.x == p2.x) {
-            int type = 1;
-            while (level1.getValue(p1.x + type, p1.y) == 0
-                    && level1.getValue(p2.x + type, p2.y) == 0) {
-                if (checkLineX(p1.x + type, p1.y, p2.y)) {
-                    return true;
-                }
-                p1.x += type;
-            }
-            type = -1;
-            while (level1.getValue(p1.x + type, p1.y) == 0
-                    && level1.getValue(p2.x + type, p2.y) == 0) {
-                if (checkLineX(p1.x + type, p1.y, p2.y)) {
-                    return true;
-                }
-                p1.x += type;
-            }
-        }
-
-        return false;
-    }
-
-    //(21)
-    private boolean checkStraightLineY(Point p1, Point p2) {
-        if (p1.y == p2.y) {
-            int type = 1;
-            while (level1.getValue(p1.x, p1.y + type) == 0
-                    && level1.getValue(p2.x, p2.y + type) == 0) {
-                if (checkLineY(p1.x, p2.x, p1.y + type)) {
-                    return true;
-                }
-                p1.x += type;
-            }
-            type = -1;
-            while (level1.getValue(p1.x, p1.y + type) == 0
-                    && level1.getValue(p2.x, p2.y + type) == 0) {
-                if (checkLineY(p1.x, p2.x, p1.y + type)) {
-                    return true;
-                }
-                p1.x += type;
-            }
-        }
-
-        return false;
-    }
-
     //check 2 point
     public boolean checkTwoPoint(Point p1, Point p2) {
         if (level1.getValue(p1.x, p1.y) == level1.getValue(p2.x, p2.y)) {
-            //(1)
-            if ((p1.x == p2.x) && p1.x == 2) {
-                if (checkLineXFirst(p1.x, p1.y, p2.y));
-                System.out.println("1");
-                return true;
-            }
-            //(2)
-            if ((p1.x == p2.x) && p1.x == 10) {
-                if (checkLineXLast(p1.x, p1.y, p2.y));
-                System.out.println("2");
-                return true;
-            }
-            //(3)
-            if ((p1.y == p2.y) && p1.y == 2) {
-                if (checkLineYFirst(p1.x, p2.x, p1.y));
-                System.out.println("3");
-                return true;
-            }
-            //(4)
-            if ((p1.y == p2.y) && p1.x == 17) {
-                if (checkLineYLast(p1.x, p2.x, p1.y));
-                System.out.println("4");
-                return true;
-            }
 
             //(5)check next X
             if (p1.x == p2.x && Math.abs(p1.y - p2.y) == 1) {
@@ -515,16 +597,7 @@ public class Algorithm {
                 System.out.println("19");
                 return true;
             }
-            //20
-            if (checkStraightLineX(p1, p2)) {
-                System.out.println("20");
-                return true;
-            }
-            //21
-            if (checkStraightLineY(p1, p2)) {
-                System.out.println("21");
-                return true;
-            }
+
         }
         return false;
     }
@@ -532,7 +605,7 @@ public class Algorithm {
     public void settohide(Point p1, Point p2) {
         level1.setValue(p1, p2);
     }
-    
+
     public boolean checkToChange() {
         for (int i = 2; i < 11; i++) {
             for (int j = 2; j < 18; j++) {
