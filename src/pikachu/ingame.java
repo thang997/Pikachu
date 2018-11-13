@@ -397,10 +397,10 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
         victory.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/phaohoa.gif")).getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
         victory.setVisible(false);
         name.setText(StaticFinalvariable.user.getUser());
-        name.setLocation(30, 150);
-        level.setLocation(750, 45);
+        name.setLocation(40, 210);
+        level.setLocation(20, 5);
         avatar.setSize(100, 100);
-        avatar.setLocation(20, 50);
+        avatar.setLocation(30, 100);
         avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.user.getLink())).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
         layout.setSize(1000, 600);
         layout.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/Sleep-Pikachu-Pokemon-Wallpaper.png")).getImage().getScaledInstance(1000, 600, Image.SCALE_DEFAULT)));
@@ -469,7 +469,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(newgame);
-        newgame.setBounds(10, 220, 80, 30);
+        newgame.setBounds(30, 280, 80, 30);
 
         pause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/pause.png"))); // NOI18N
         pause.addActionListener(new java.awt.event.ActionListener() {
@@ -478,7 +478,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(pause);
-        pause.setBounds(10, 260, 80, 30);
+        pause.setBounds(30, 320, 80, 30);
 
         time.setFont(new java.awt.Font("MV Boli", 0, 40)); // NOI18N
         time.setText("Time");
@@ -492,7 +492,7 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(score);
-        score.setBounds(10, 300, 80, 30);
+        score.setBounds(30, 360, 80, 30);
 
         diem.setFont(new java.awt.Font("MV Boli", 0, 40)); // NOI18N
         diem.setText("Score:0");
@@ -511,21 +511,21 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
             }
         });
         getContentPane().add(hint);
-        hint.setBounds(10, 340, 80, 30);
+        hint.setBounds(30, 400, 80, 30);
         getContentPane().add(progesstime);
         progesstime.setBounds(130, 10, 450, 30);
 
         counthint.setFont(new java.awt.Font("MV Boli", 0, 20)); // NOI18N
         counthint.setText("3");
         getContentPane().add(counthint);
-        counthint.setBounds(40, 370, 60, 40);
+        counthint.setBounds(60, 430, 60, 40);
         getContentPane().add(layouttroll);
         layouttroll.setBounds(50, 320, 90, 110);
 
-        level.setFont(new java.awt.Font("MV Boli", 0, 30)); // NOI18N
+        level.setFont(new java.awt.Font("MV Boli", 0, 40)); // NOI18N
         level.setText("Level:1");
         getContentPane().add(level);
-        level.setBounds(10, 80, 120, 40);
+        level.setBounds(10, 80, 160, 40);
         getContentPane().add(avatar);
         avatar.setBounds(10, 380, 80, 70);
 
