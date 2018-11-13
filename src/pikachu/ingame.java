@@ -140,6 +140,10 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        StaticFinalvariable.p1 = null;
+        StaticFinalvariable.p2 = null;
+        StaticFinalvariable.p3 = null;
+        StaticFinalvariable.p4 = null;
         String btnIndex = e.getActionCommand();
         int indexDot = btnIndex.lastIndexOf(",");
         int x = Integer.parseInt(btnIndex.substring(0, indexDot));
@@ -336,10 +340,6 @@ public class ingame extends javax.swing.JFrame implements ActionListener {
                 }
             }
         }
-        StaticFinalvariable.p1 = null;
-        StaticFinalvariable.p2 = null;
-        StaticFinalvariable.p3 = null;
-        StaticFinalvariable.p4 = null;
     }
 
     private void musicSuccess() {

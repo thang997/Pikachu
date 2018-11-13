@@ -227,15 +227,15 @@ public class Algorithm {
                 } else {
                     return false;
                 }
-            } else {
+            } else {    
                 if (checkLineY(p1.x, p2.x - 1, p1.y) == true) {
                     StaticFinalvariable.p1 = p1;
-                    StaticFinalvariable.p2 = new Point(p1.x, p2.y);
+                    StaticFinalvariable.p2 = new Point(p2.x, p1.y);
                     StaticFinalvariable.p3 = p2;
                     return true;
                 } else if (checkLineY(p1.x + 1, p2.x, p1.y + 1) == true) {
                     StaticFinalvariable.p1 = p1;
-                    StaticFinalvariable.p2 = new Point(p2.x, p1.y);
+                    StaticFinalvariable.p2 = new Point(p1.x, p2.y);
                     StaticFinalvariable.p3 = p2;
                     return true;
                 } else {
