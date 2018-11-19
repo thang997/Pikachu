@@ -39,10 +39,6 @@ public class FormLogin extends javax.swing.JFrame {
         setTitle("Form Login");
         setResizable(false);
         setLocationRelativeTo(null);
-//        register.setOpaque(false);
-//        layoutlogin.setSize(280,290);
-//jLabel3.setVisible(false);
-        //login.setBackground(Color.red);
     }
 
     public boolean checkrong() {
@@ -161,7 +157,7 @@ public class FormLogin extends javax.swing.JFrame {
                 if (rs.next()) {
                     this.setVisible(false);
                     StaticFinalvariable.user.setUser(userLogin.getText());
-                    beforegame bf = new beforegame();
+                    BeforeGame bf = new BeforeGame();
                     bf.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(this, "User or password is not correct");

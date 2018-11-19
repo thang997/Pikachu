@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Thang
  */
-public class scorerank extends javax.swing.JFrame {
+public class ScoreRank extends javax.swing.JFrame {
 
     /**
      * Creates new form scorerank
@@ -36,7 +36,7 @@ public class scorerank extends javax.swing.JFrame {
     DefaultTableModel model;
     InetAddress ip;
 
-    public scorerank() {
+    public ScoreRank() {
         initComponents();
         setSize(300, 400);
         setTitle("High Score");
@@ -78,9 +78,9 @@ public class scorerank extends javax.swing.JFrame {
                 model.addRow(rows);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(scorerank.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ScoreRank.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnknownHostException ex) {
-            Logger.getLogger(scorerank.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ScoreRank.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

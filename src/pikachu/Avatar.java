@@ -14,12 +14,12 @@ import javax.swing.border.LineBorder;
  *
  * @author Thang
  */
-public class avatar extends javax.swing.JFrame {
+public class Avatar extends javax.swing.JFrame {
 private String link;
     /**
-     * Creates new form avatar
+     * Creates new form avatars
      */
-    public avatar() {
+    public Avatar() {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
@@ -31,7 +31,6 @@ private String link;
         anh4.setBorder(new LineBorder(Color.GREEN, 2));
         save.setBackground(Color.green);
         cancel.setBackground(Color.red);
-//        cancel.setBackground(new Color(ERROR, rootPaneCheckingEnabled));
         setdata();
     }
 

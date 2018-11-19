@@ -9,12 +9,12 @@ package pikachu;
  *
  * @author Thang
  */
-public class beforegame extends javax.swing.JFrame {
+public class BeforeGame extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
-    public beforegame() {
+    public BeforeGame() {
         initComponents();  
         setResizable(false);
         setSize(430,330);
@@ -77,7 +77,7 @@ public class beforegame extends javax.swing.JFrame {
 
     private void batdauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batdauActionPerformed
         // TODO add your handling code here:
-        ingame in = new ingame();
+        InGame in = new InGame();
         in.setVisible(true);
         this.setVisible(false);
     
@@ -86,7 +86,7 @@ public class beforegame extends javax.swing.JFrame {
 
     private void scoreallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scoreallActionPerformed
         // TODO add your handling code here:
-        scoreall sa = new scoreall();
+        ScoreAll sa = new ScoreAll();
         sa.setVisible(true);
         
     }//GEN-LAST:event_scoreallActionPerformed

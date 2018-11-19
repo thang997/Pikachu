@@ -8,7 +8,7 @@ package pikachu;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
-import pikachu.ingame;
+import pikachu.InGame;
 
 /**
  *

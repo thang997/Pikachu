@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Thang
  */
-public class scoreall extends javax.swing.JFrame {
+public class ScoreAll extends javax.swing.JFrame {
 
     /**
      * Creates new form scoreall
@@ -35,7 +35,7 @@ public class scoreall extends javax.swing.JFrame {
     DefaultTableModel model;
     InetAddress ip;
 
-    public scoreall() {
+    public ScoreAll() {
         initComponents();
         setSize(300, 400);
         setTitle("High Score");
@@ -74,9 +74,9 @@ public class scoreall extends javax.swing.JFrame {
                 model.addRow(rows);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(scorerank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(ScoreRank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (UnknownHostException ex) {
-            Logger.getLogger(scorerank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(ScoreRank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
 

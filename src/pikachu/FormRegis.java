@@ -54,11 +54,11 @@ public class FormRegis extends javax.swing.JFrame {
     }
 
     public boolean check() {
-        return userlogin.getText().equals("") || passlogin.getText().equals("") || repass.getText().equals("");
+        return userLogin.getText().equals("") || passLogin.getText().equals("") || repass.getText().equals("");
     }
 
     public boolean check2() {
-        return passlogin.getText().equals(repass.getText().trim());
+        return passLogin.getText().equals(repass.getText().trim());
     }
 
     public boolean check3() {
@@ -69,7 +69,7 @@ public class FormRegis extends javax.swing.JFrame {
                     .getConnection(url, user, password);
             String sql = "select username from login where username = ?";
             pStmt = connection.prepareStatement(sql);
-            pStmt.setString(1, userlogin.getText());
+            pStmt.setString(1, userLogin.getText());
             rs = pStmt.executeQuery();
             if (!rs.next()) {
                 return true;
@@ -110,37 +110,37 @@ public class FormRegis extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        userlogin = new javax.swing.JTextField();
+        userLogin = new javax.swing.JTextField();
         choose = new javax.swing.JButton();
         regis = new javax.swing.JButton();
         back = new javax.swing.JButton();
-        passlogin = new javax.swing.JPasswordField();
+        passLogin = new javax.swing.JPasswordField();
         repass = new javax.swing.JPasswordField();
         avatar = new javax.swing.JLabel();
-        showpass = new javax.swing.JCheckBox();
-        showpass1 = new javax.swing.JCheckBox();
-        layoutregis = new javax.swing.JLabel();
+        showPass = new javax.swing.JCheckBox();
+        showPass1 = new javax.swing.JCheckBox();
+        layoutRegis = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jLabel1.setText("Username");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(80, 53, 80, 14);
+        jLabel1.setBounds(80, 53, 80, 16);
 
         jLabel2.setText("Password");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(80, 84, 80, 14);
+        jLabel2.setBounds(80, 84, 80, 16);
 
         jLabel3.setText("Re-passwrord");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(80, 115, 80, 14);
+        jLabel3.setBounds(80, 115, 80, 16);
 
         jLabel4.setText("Avatar");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(80, 190, 60, 14);
-        getContentPane().add(userlogin);
-        userlogin.setBounds(165, 50, 140, 30);
+        jLabel4.setBounds(80, 190, 60, 16);
+        getContentPane().add(userLogin);
+        userLogin.setBounds(165, 50, 140, 30);
 
         choose.setText("Choose");
         choose.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +149,7 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(choose);
-        choose.setBounds(170, 240, 100, 23);
+        choose.setBounds(170, 240, 100, 25);
 
         regis.setText("Register");
         regis.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +158,7 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(regis);
-        regis.setBounds(110, 310, 80, 23);
+        regis.setBounds(110, 310, 80, 25);
 
         back.setText("Back");
         back.setCursor(new java.awt.Cursor(java.awt.Cursor.SE_RESIZE_CURSOR));
@@ -168,40 +168,40 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(back);
-        back.setBounds(250, 310, 55, 23);
-        getContentPane().add(passlogin);
-        passlogin.setBounds(165, 81, 140, 30);
+        back.setBounds(250, 310, 59, 25);
+        getContentPane().add(passLogin);
+        passLogin.setBounds(165, 81, 140, 30);
         getContentPane().add(repass);
         repass.setBounds(165, 112, 140, 30);
         getContentPane().add(avatar);
         avatar.setBounds(170, 150, 100, 80);
 
-        showpass.setText("show");
-        showpass.addActionListener(new java.awt.event.ActionListener() {
+        showPass.setText("show");
+        showPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showpassActionPerformed(evt);
+                showPassActionPerformed(evt);
             }
         });
-        getContentPane().add(showpass);
-        showpass.setBounds(314, 80, 70, 23);
+        getContentPane().add(showPass);
+        showPass.setBounds(314, 80, 70, 25);
 
-        showpass1.setText("show");
-        showpass1.addActionListener(new java.awt.event.ActionListener() {
+        showPass1.setText("show");
+        showPass1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showpass1ActionPerformed(evt);
+                showPass1ActionPerformed(evt);
             }
         });
-        getContentPane().add(showpass1);
-        showpass1.setBounds(314, 111, 70, 23);
-        getContentPane().add(layoutregis);
-        layoutregis.setBounds(0, 0, 380, 340);
+        getContentPane().add(showPass1);
+        showPass1.setBounds(314, 111, 70, 25);
+        getContentPane().add(layoutRegis);
+        layoutRegis.setBounds(0, 0, 380, 340);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void chooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseActionPerformed
         // TODO add your handling code here:
-        avatar a = new avatar();
+        Avatar a = new Avatar();
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_chooseActionPerformed
@@ -221,7 +221,7 @@ public class FormRegis extends javax.swing.JFrame {
             if (check2() == false) {
                 JOptionPane.showMessageDialog(null, "re-password is not match");
             } else {
-                if (passlogin.getText().length() < 8) {
+                if (passLogin.getText().length() < 8) {
                     JOptionPane.showMessageDialog(null, "your password is too short");
                 } else {
                     if (check3() == true) {
@@ -232,8 +232,8 @@ public class FormRegis extends javax.swing.JFrame {
                                     .getConnection(url, user, password);
                             String sql = "INSERT INTO login(username, password , linkanh) VALUES(?,?,?);";
                             pStmt = connection.prepareStatement(sql);
-                            pStmt.setString(1, userlogin.getText());
-                            pStmt.setString(2, MD5(passlogin.getText()));
+                            pStmt.setString(1, userLogin.getText());
+                            pStmt.setString(2, MD5(passLogin.getText()));
                             pStmt.setString(3, StaticFinalvariable.user.getLink());
                             int result = pStmt.executeUpdate();
                             if (result > 0) {
@@ -261,23 +261,23 @@ public class FormRegis extends javax.swing.JFrame {
 
     }//GEN-LAST:event_regisActionPerformed
 
-    private void showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showpassActionPerformed
+    private void showPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPassActionPerformed
         // TODO add your handling code here:
-        if (showpass.isSelected()) {
-            passlogin.setEchoChar((char) 0);
+        if (showPass.isSelected()) {
+            passLogin.setEchoChar((char) 0);
         } else {
-            passlogin.setEchoChar('*');
+            passLogin.setEchoChar('*');
         }
-    }//GEN-LAST:event_showpassActionPerformed
+    }//GEN-LAST:event_showPassActionPerformed
 
-    private void showpass1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showpass1ActionPerformed
+    private void showPass1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPass1ActionPerformed
         // TODO add your handling code here:
-        if (showpass1.isSelected()) {
+        if (showPass1.isSelected()) {
             repass.setEchoChar((char) 0);
         } else {
             repass.setEchoChar('*');
         }
-    }//GEN-LAST:event_showpass1ActionPerformed
+    }//GEN-LAST:event_showPass1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -288,12 +288,12 @@ public class FormRegis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel layoutregis;
-    private javax.swing.JPasswordField passlogin;
+    private javax.swing.JLabel layoutRegis;
+    private javax.swing.JPasswordField passLogin;
     private javax.swing.JButton regis;
     private javax.swing.JPasswordField repass;
-    private javax.swing.JCheckBox showpass;
-    private javax.swing.JCheckBox showpass1;
-    private javax.swing.JTextField userlogin;
+    private javax.swing.JCheckBox showPass;
+    private javax.swing.JCheckBox showPass1;
+    private javax.swing.JTextField userLogin;
     // End of variables declaration//GEN-END:variables
 }
