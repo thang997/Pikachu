@@ -260,7 +260,7 @@ public class InGame extends javax.swing.JFrame implements ActionListener {
                 }
 
             } else {
-                musicFail();
+//                musicFail();
             }
             btn[p1.x][p1.y].setBorder(null);
             btn[p2.x][p2.y].setBorder(null);
@@ -292,6 +292,7 @@ public class InGame extends javax.swing.JFrame implements ActionListener {
                     }
                 }
             } else {
+                t.stop();
                 try {
                     ip = InetAddress.getLocalHost();
                     url = "jdbc:mysql://" + ip.getHostAddress() + "/scorerank?useSSL=false";
@@ -309,6 +310,7 @@ public class InGame extends javax.swing.JFrame implements ActionListener {
                 int click = JOptionPane.showConfirmDialog(null, "\tYou Win\n"
                         + "Do you wanna play again?", "Question", JOptionPane.YES_NO_OPTION);
                 if (click == JOptionPane.YES_OPTION) {
+                    t.start();
                     for (int i = 2; i < 11; i++) {
                         for (int j = 2; j < 18; j++) {
                             btn[i][j].setBorder(null);
@@ -321,6 +323,8 @@ public class InGame extends javax.swing.JFrame implements ActionListener {
                     level.setText("Level:" + StaticFinalvariable.Level);
                     Score.setText("Score: " + StaticFinalvariable.TotalPoint);
                     countHint.setText(String.valueOf(StaticFinalvariable.hintNumber));
+                    layout.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/" + StaticFinalvariable.Level + ".jpg")).getImage().getScaledInstance(1000, 600, Image.SCALE_DEFAULT)));
+                    victory.setVisible(false);
                     count = 100;
                     progessTime.setValue((int) count);
                     t.start();
@@ -347,12 +351,12 @@ public class InGame extends javax.swing.JFrame implements ActionListener {
         String uri = new File("ting.mp3").toURI().toString();
         new MediaPlayer(new Media(uri)).play();
     }
-
-    private void musicFail() {
-        JFXPanel j = new JFXPanel();
-        String uri = new File("te.mp3").toURI().toString();
-        new MediaPlayer(new Media(uri)).play();
-    }
+//
+//    private void musicFail() {
+//        JFXPanel j = new JFXPanel();
+//        String uri = new File("te.mp3").toURI().toString();
+//        new MediaPlayer(new Media(uri)).play();
+//    }
 
     private void Change() {
         if (!algorithm.checkToChange()) {
@@ -393,7 +397,7 @@ public class InGame extends javax.swing.JFrame implements ActionListener {
         time.setLocation(180, 0);
         progessTime.setLocation(280, 10);
         victory.setSize(600, 400);
-        victory.setLocation(150, 150);
+        victory.setLocation(250, 130);
         victory.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/phaohoa.gif")).getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
         victory.setVisible(false);
         name.setText(StaticFinalvariable.user.getUser());
@@ -403,7 +407,7 @@ public class InGame extends javax.swing.JFrame implements ActionListener {
         avatar.setLocation(30, 100);
         avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.user.getLink())).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
         layout.setSize(1000, 600);
-        layout.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/Sleep-Pikachu-Pokemon-Wallpaper.png")).getImage().getScaledInstance(1000, 600, Image.SCALE_DEFAULT)));
+        layout.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/1.jpg")).getImage().getScaledInstance(1000, 600, Image.SCALE_DEFAULT)));
         layoutPikachu.setBackground(null);
         layoutPikachu.setSize(800, 500);
         Score.setLocation(750, -7);
@@ -535,7 +539,7 @@ public class InGame extends javax.swing.JFrame implements ActionListener {
         getContentPane().add(victory);
         victory.setBounds(360, 50, 0, 0);
 
-        layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/Sleep-Pikachu-Pokemon-Wallpaper.png"))); // NOI18N
+        layout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/1.jpg"))); // NOI18N
         getContentPane().add(layout);
         layout.setBounds(0, 0, 610, 500);
 
