@@ -260,7 +260,7 @@ public class InGame extends javax.swing.JFrame implements ActionListener {
                 }
 
             } else {
-                musicFail();
+               
             }
             btn[p1.x][p1.y].setBorder(null);
             btn[p2.x][p2.y].setBorder(null);
@@ -341,19 +341,7 @@ public class InGame extends javax.swing.JFrame implements ActionListener {
             }
         }
     }
-
-    private void musicSuccess() {
-        JFXPanel j = new JFXPanel();
-        String uri = new File("ting.mp3").toURI().toString();
-        new MediaPlayer(new Media(uri)).play();
-    }
-
-    private void musicFail() {
-        JFXPanel j = new JFXPanel();
-        String uri = new File("te.mp3").toURI().toString();
-        new MediaPlayer(new Media(uri)).play();
-    }
-
+    
     private void Change() {
         if (!algorithm.checkToChange()) {
             ArrayList<Point> listPoint = new ArrayList<>();
@@ -407,10 +395,6 @@ public class InGame extends javax.swing.JFrame implements ActionListener {
         layoutPikachu.setBackground(null);
         layoutPikachu.setSize(800, 500);
         Score.setLocation(750, -7);
-        layoutTroll.setVisible(false);
-        layoutTroll.setSize(400, 400);
-        layoutTroll.setLocation(250, 150);
-        layoutTroll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pikachu/image/troll.jpg")));
         pane.add(layoutPikachu, new Integer(1));
     }
 

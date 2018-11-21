@@ -173,7 +173,10 @@ private String link;
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         // TODO add your handling code here:
+        
         this.setVisible(false);
+        FormRegis fr = new FormRegis();
+        fr.setVisible(true);
     }//GEN-LAST:event_cancelActionPerformed
 
     private void anh3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anh3ActionPerformed
