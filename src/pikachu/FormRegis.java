@@ -46,9 +46,8 @@ public class FormRegis extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Form Register");
         setLocationRelativeTo(null);
-        back.setCursor(new Cursor(HAND_CURSOR));
-        regis.setCursor(new Cursor(HAND_CURSOR));
-        choose.setCursor(new Cursor(HAND_CURSOR));
+        layoutRegis.setSize(400,400);
+        layoutRegis.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/n.jpg")).getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT)));
         avatar.setBorder(new LineBorder(Color.yellow));
         avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.user.getLink())).getImage().getScaledInstance(100, 80, Image.SCALE_DEFAULT)));
     }
@@ -126,19 +125,19 @@ public class FormRegis extends javax.swing.JFrame {
 
         jLabel1.setText("Username");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(80, 53, 80, 16);
+        jLabel1.setBounds(80, 53, 80, 14);
 
         jLabel2.setText("Password");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(80, 84, 80, 16);
+        jLabel2.setBounds(80, 84, 80, 14);
 
         jLabel3.setText("Re-passwrord");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(80, 115, 80, 16);
+        jLabel3.setBounds(80, 115, 80, 14);
 
         jLabel4.setText("Avatar");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(80, 190, 60, 16);
+        jLabel4.setBounds(80, 190, 60, 14);
         getContentPane().add(userLogin);
         userLogin.setBounds(165, 50, 140, 30);
 
@@ -149,7 +148,7 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(choose);
-        choose.setBounds(170, 240, 100, 25);
+        choose.setBounds(170, 240, 100, 23);
 
         regis.setText("Register");
         regis.addActionListener(new java.awt.event.ActionListener() {
@@ -158,17 +157,17 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(regis);
-        regis.setBounds(110, 310, 80, 25);
+        regis.setBounds(130, 280, 80, 23);
 
         back.setText("Back");
-        back.setCursor(new java.awt.Cursor(java.awt.Cursor.SE_RESIZE_CURSOR));
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
             }
         });
         getContentPane().add(back);
-        back.setBounds(250, 310, 59, 25);
+        back.setBounds(230, 280, 55, 23);
         getContentPane().add(passLogin);
         passLogin.setBounds(165, 81, 140, 30);
         getContentPane().add(repass);
@@ -183,7 +182,7 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(showPass);
-        showPass.setBounds(314, 80, 70, 25);
+        showPass.setBounds(314, 80, 70, 23);
 
         showPass1.setText("show");
         showPass1.addActionListener(new java.awt.event.ActionListener() {
@@ -192,7 +191,7 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(showPass1);
-        showPass1.setBounds(314, 111, 70, 25);
+        showPass1.setBounds(314, 111, 70, 23);
         getContentPane().add(layoutRegis);
         layoutRegis.setBounds(0, 0, 380, 340);
 

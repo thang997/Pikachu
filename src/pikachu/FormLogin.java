@@ -6,12 +6,14 @@
 package pikachu;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -39,6 +41,8 @@ public class FormLogin extends javax.swing.JFrame {
         setTitle("Form Login");
         setResizable(false);
         setLocationRelativeTo(null);
+        layoutLogin.setSize(400,300);
+        layoutLogin.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/b.jpg")).getImage().getScaledInstance(400, 300, Image.SCALE_DEFAULT)));
     }
 
     public boolean checkrong() {
@@ -77,20 +81,20 @@ public class FormLogin extends javax.swing.JFrame {
         passLogin = new javax.swing.JPasswordField();
         showpass = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
-        layoutlogin = new javax.swing.JLabel();
+        layoutLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jLabel1.setText("User");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(80, 100, 60, 14);
+        jLabel1.setBounds(80, 120, 60, 14);
 
         jLabel2.setText("Password");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(80, 140, 60, 14);
+        jLabel2.setBounds(80, 160, 60, 14);
         getContentPane().add(userLogin);
-        userLogin.setBounds(150, 90, 134, 30);
+        userLogin.setBounds(160, 110, 134, 30);
 
         login.setText("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +103,7 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(login);
-        login.setBounds(100, 200, 70, 23);
+        login.setBounds(80, 230, 70, 23);
 
         register.setText("Register");
         register.addActionListener(new java.awt.event.ActionListener() {
@@ -108,9 +112,9 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(register);
-        register.setBounds(190, 200, 90, 23);
+        register.setBounds(200, 230, 90, 23);
         getContentPane().add(passLogin);
-        passLogin.setBounds(150, 130, 134, 30);
+        passLogin.setBounds(160, 150, 134, 30);
 
         showpass.setText("show");
         showpass.addActionListener(new java.awt.event.ActionListener() {
@@ -119,14 +123,14 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(showpass);
-        showpass.setBounds(290, 130, 70, 23);
+        showpass.setBounds(160, 190, 70, 23);
 
         jLabel3.setFont(new java.awt.Font("MV Boli", 0, 30)); // NOI18N
         jLabel3.setText("LOGIN");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(150, 10, 190, 50);
-        getContentPane().add(layoutlogin);
-        layoutlogin.setBounds(0, 0, 350, 290);
+        getContentPane().add(layoutLogin);
+        layoutLogin.setBounds(0, 0, 350, 290);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -218,7 +222,7 @@ public class FormLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel layoutlogin;
+    private javax.swing.JLabel layoutLogin;
     private javax.swing.JButton login;
     private javax.swing.JPasswordField passLogin;
     private javax.swing.JButton register;

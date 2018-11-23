@@ -24,6 +24,9 @@ private String link;
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Pick Your Avatar");
+        setSize(400,300);
+        setResizable(false);
+        setLocationRelativeTo(null);
         avatar.setBorder(new LineBorder(Color.yellow, 2));
         anh1.setBorder(new LineBorder(Color.yellow, 2));
         anh2.setBorder(new LineBorder(Color.blue, 2));
@@ -31,6 +34,8 @@ private String link;
         anh4.setBorder(new LineBorder(Color.GREEN, 2));
         save.setBackground(Color.green);
         cancel.setBackground(Color.red);
+        layout.setSize(400,300);
+        layout.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/av.jpg")).getImage().getScaledInstance(400, 300, Image.SCALE_DEFAULT)));
         setdata();
     }
 
@@ -57,8 +62,12 @@ private String link;
         anh2 = new javax.swing.JButton();
         anh3 = new javax.swing.JButton();
         anh4 = new javax.swing.JButton();
+        layout = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+        getContentPane().add(avatar);
+        avatar.setBounds(130, 30, 135, 120);
 
         save.setText("save");
         save.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +75,8 @@ private String link;
                 saveActionPerformed(evt);
             }
         });
+        getContentPane().add(save);
+        save.setBounds(130, 160, 55, 23);
 
         cancel.setText("cancel");
         cancel.addActionListener(new java.awt.event.ActionListener() {
@@ -73,79 +84,42 @@ private String link;
                 cancelActionPerformed(evt);
             }
         });
+        getContentPane().add(cancel);
+        cancel.setBounds(190, 160, 80, 23);
 
         anh1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 anh1ActionPerformed(evt);
             }
         });
+        getContentPane().add(anh1);
+        anh1.setBounds(30, 200, 65, 55);
 
         anh2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 anh2ActionPerformed(evt);
             }
         });
+        getContentPane().add(anh2);
+        anh2.setBounds(120, 200, 65, 55);
 
         anh3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 anh3ActionPerformed(evt);
             }
         });
+        getContentPane().add(anh3);
+        anh3.setBounds(210, 200, 65, 55);
 
         anh4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 anh4ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(save)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cancel))
-                            .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(anh1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(anh2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(anh3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(anh4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {anh1, anh2, anh3, anh4});
-
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cancel)
-                    .addComponent(save))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(anh4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(anh1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(anh2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(anh3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {anh1, anh2, anh3, anh4});
+        getContentPane().add(anh4);
+        anh4.setBounds(300, 200, 65, 55);
+        getContentPane().add(layout);
+        layout.setBounds(0, 0, 400, 300);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -198,6 +172,7 @@ private String link;
     private javax.swing.JButton anh4;
     private javax.swing.JLabel avatar;
     private javax.swing.JButton cancel;
+    private javax.swing.JLabel layout;
     private javax.swing.JButton save;
     // End of variables declaration//GEN-END:variables
 }
