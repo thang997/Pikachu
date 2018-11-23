@@ -24,7 +24,7 @@ private String link;
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Pick Your Avatar");
-        setSize(400,300);
+        setSize(550,400);
         setResizable(false);
         setLocationRelativeTo(null);
         avatar.setBorder(new LineBorder(Color.yellow, 2));
@@ -34,16 +34,16 @@ private String link;
         anh4.setBorder(new LineBorder(Color.GREEN, 2));
         save.setBackground(Color.green);
         cancel.setBackground(Color.red);
-        layout.setSize(400,300);
-        layout.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/av.jpg")).getImage().getScaledInstance(400, 300, Image.SCALE_DEFAULT)));
+        layout.setSize(550,400);
+        layout.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/av.jpg")).getImage().getScaledInstance(550, 400, Image.SCALE_DEFAULT)));
         setdata();
     }
 
     public void setdata() {
-        anh1.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[0])).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-        anh2.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[1])).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-        anh3.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[2])).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
-        anh4.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[3])).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT)));
+        anh1.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[0])).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+        anh2.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[1])).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+        anh3.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[2])).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
+        anh4.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[3])).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
     }
 
     /**
@@ -67,8 +67,9 @@ private String link;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
         getContentPane().add(avatar);
-        avatar.setBounds(130, 30, 135, 120);
+        avatar.setBounds(180, 40, 170, 150);
 
+        save.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         save.setText("save");
         save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,8 +77,9 @@ private String link;
             }
         });
         getContentPane().add(save);
-        save.setBounds(130, 160, 55, 23);
+        save.setBounds(170, 210, 70, 31);
 
+        cancel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cancel.setText("cancel");
         cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,7 +87,7 @@ private String link;
             }
         });
         getContentPane().add(cancel);
-        cancel.setBounds(190, 160, 80, 23);
+        cancel.setBounds(270, 210, 80, 31);
 
         anh1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +95,7 @@ private String link;
             }
         });
         getContentPane().add(anh1);
-        anh1.setBounds(30, 200, 65, 55);
+        anh1.setBounds(30, 260, 100, 80);
 
         anh2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,7 +103,7 @@ private String link;
             }
         });
         getContentPane().add(anh2);
-        anh2.setBounds(120, 200, 65, 55);
+        anh2.setBounds(160, 260, 100, 80);
 
         anh3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +111,7 @@ private String link;
             }
         });
         getContentPane().add(anh3);
-        anh3.setBounds(210, 200, 65, 55);
+        anh3.setBounds(280, 260, 100, 80);
 
         anh4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,7 +119,7 @@ private String link;
             }
         });
         getContentPane().add(anh4);
-        anh4.setBounds(300, 200, 65, 55);
+        anh4.setBounds(400, 260, 100, 80);
         getContentPane().add(layout);
         layout.setBounds(0, 0, 400, 300);
 
@@ -134,14 +136,14 @@ private String link;
 
     private void anh1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anh1ActionPerformed
         // TODO add your handling code here:
-        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[0])).getImage().getScaledInstance(130, 120, Image.SCALE_DEFAULT)));
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[0])).getImage().getScaledInstance(180, 160, Image.SCALE_DEFAULT)));
         link=StaticFinalvariable.image[0];
 
     }//GEN-LAST:event_anh1ActionPerformed
 
     private void anh2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anh2ActionPerformed
         // TODO add your handling code here:
-        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[1])).getImage().getScaledInstance(130, 130, Image.SCALE_DEFAULT)));
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[1])).getImage().getScaledInstance(180, 160, Image.SCALE_DEFAULT)));
         link=StaticFinalvariable.image[1];
     }//GEN-LAST:event_anh2ActionPerformed
 
@@ -155,12 +157,12 @@ private String link;
 
     private void anh3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anh3ActionPerformed
         // TODO add your handling code here:
-        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[2])).getImage().getScaledInstance(130, 150, Image.SCALE_DEFAULT)));
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[2])).getImage().getScaledInstance(180, 150, Image.SCALE_DEFAULT)));
         link=StaticFinalvariable.image[2];
     }//GEN-LAST:event_anh3ActionPerformed
 
     private void anh4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anh4ActionPerformed
-        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[3])).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
+        avatar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource(StaticFinalvariable.image[3])).getImage().getScaledInstance(180, 180, Image.SCALE_DEFAULT)));
         // TODO add your handling code here:
         link=StaticFinalvariable.image[3];
     }//GEN-LAST:event_anh4ActionPerformed

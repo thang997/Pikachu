@@ -42,7 +42,7 @@ public class FormLogin extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         layoutLogin.setSize(400,300);
-        layoutLogin.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/b.jpg")).getImage().getScaledInstance(400, 300, Image.SCALE_DEFAULT)));
+        layoutLogin.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/pikachu/image/12345.jpg")).getImage().getScaledInstance(400, 300, Image.SCALE_DEFAULT)));
     }
 
     public boolean checkrong() {
@@ -86,16 +86,19 @@ public class FormLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("User");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(80, 120, 60, 14);
+        jLabel1.setBounds(80, 120, 60, 22);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Password");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(80, 160, 60, 14);
+        jLabel2.setBounds(80, 160, 80, 22);
         getContentPane().add(userLogin);
         userLogin.setBounds(160, 110, 134, 30);
 
+        login.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         login.setText("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,8 +106,9 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(login);
-        login.setBounds(80, 230, 70, 23);
+        login.setBounds(80, 220, 80, 40);
 
+        register.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         register.setText("Register");
         register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +116,7 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(register);
-        register.setBounds(200, 230, 90, 23);
+        register.setBounds(200, 220, 100, 40);
         getContentPane().add(passLogin);
         passLogin.setBounds(160, 150, 134, 30);
 
@@ -123,7 +127,7 @@ public class FormLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(showpass);
-        showpass.setBounds(160, 190, 70, 23);
+        showpass.setBounds(160, 190, 70, 25);
 
         jLabel3.setFont(new java.awt.Font("MV Boli", 0, 30)); // NOI18N
         jLabel3.setText("LOGIN");

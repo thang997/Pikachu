@@ -123,24 +123,29 @@ public class FormRegis extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Username");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(80, 53, 80, 14);
+        jLabel1.setBounds(80, 53, 80, 22);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Password");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(80, 84, 80, 14);
+        jLabel2.setBounds(80, 84, 80, 22);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Re-passwrord");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(80, 115, 80, 14);
+        jLabel3.setBounds(50, 115, 110, 22);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Avatar");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(80, 190, 60, 14);
+        jLabel4.setBounds(80, 190, 60, 22);
         getContentPane().add(userLogin);
         userLogin.setBounds(165, 50, 140, 30);
 
+        choose.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         choose.setText("Choose");
         choose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,8 +153,9 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(choose);
-        choose.setBounds(170, 240, 100, 23);
+        choose.setBounds(170, 240, 100, 31);
 
+        regis.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         regis.setText("Register");
         regis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,8 +163,9 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(regis);
-        regis.setBounds(130, 280, 80, 23);
+        regis.setBounds(110, 280, 100, 31);
 
+        back.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         back.setText("Back");
         back.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         back.addActionListener(new java.awt.event.ActionListener() {
@@ -167,7 +174,7 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(back);
-        back.setBounds(230, 280, 55, 23);
+        back.setBounds(230, 280, 70, 30);
         getContentPane().add(passLogin);
         passLogin.setBounds(165, 81, 140, 30);
         getContentPane().add(repass);
@@ -182,7 +189,7 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(showPass);
-        showPass.setBounds(314, 80, 70, 23);
+        showPass.setBounds(314, 80, 70, 25);
 
         showPass1.setText("show");
         showPass1.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +198,7 @@ public class FormRegis extends javax.swing.JFrame {
             }
         });
         getContentPane().add(showPass1);
-        showPass1.setBounds(314, 111, 70, 23);
+        showPass1.setBounds(314, 111, 70, 25);
         getContentPane().add(layoutRegis);
         layoutRegis.setBounds(0, 0, 380, 340);
 
