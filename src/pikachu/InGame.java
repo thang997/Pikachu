@@ -136,10 +136,6 @@ public class InGame extends javax.swing.JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        StaticFinalvariable.p1 = null;
-        StaticFinalvariable.p2 = null;
-        StaticFinalvariable.p3 = null;
-        StaticFinalvariable.p4 = null;
         String btnIndex = e.getActionCommand();
         int indexDot = btnIndex.lastIndexOf(",");
         int x = Integer.parseInt(btnIndex.substring(0, indexDot));
@@ -153,7 +149,7 @@ public class InGame extends javax.swing.JFrame implements ActionListener {
             }
             p1 = new Point(x, y);
             btn[p1.x][p1.y].setBorder(new LineBorder(Color.red, 5));
-        } else {
+        } else {            
             int countBorder = 0;
             for (int i = 2; i < 11; i++) {
                 for (int j = 2; j < 18; j++) {
@@ -171,6 +167,10 @@ public class InGame extends javax.swing.JFrame implements ActionListener {
             }
             countBorder = 0;
             p2 = new Point(x, y);
+            StaticFinalvariable.p1 = null;
+            StaticFinalvariable.p2 = null;
+            StaticFinalvariable.p3 = null;
+            StaticFinalvariable.p4 = null;
             if (algorithm.checkTwoPoint(p1, p2) && !p1.equals(p2)) {
                 Thread thread = new Thread(new Runnable() {
                     @Override
